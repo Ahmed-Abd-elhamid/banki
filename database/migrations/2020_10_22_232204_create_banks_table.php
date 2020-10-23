@@ -18,7 +18,7 @@ class CreateBanksTable extends Migration
             $table->string('name')->unique();
             $table->string('website');
             $table->string('email')->unique();
-            $table->text('about');
+            $table->text('about')->nullable();
             $table->timestamps();
         });
     }

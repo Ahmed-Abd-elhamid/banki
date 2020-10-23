@@ -16,6 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('account_num')->unique();
+            $table->unsignedDecimal('balance', 30, 4);
             $table->enum('type', ['current', 'saving', 'credit', 'joint']);
             $table->string('currency');
             // $table->enum('currency', ['USD', 'EURO', 'EGP', 'SAR', 'YEN']);

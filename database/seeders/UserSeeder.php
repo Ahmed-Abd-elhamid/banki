@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Account;
+use App\Models\User;
 
-class AccountSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        Account::factory(10)->create();
+        User::factory(5)->create();
     }
 }
