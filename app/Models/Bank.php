@@ -16,10 +16,10 @@ class Bank extends Model
     protected $guarded = [];
 
     public function accounts(){
-        $this->hasMany('App\Models\Account');
+        return $this->hasMany('App\Models\Account');
     }
 
     public function users(){
-        return $this->hasManyThrough('App\Models\Account', 'App\Models\User');
+        return $this->belongsToMany('App\Models\User', 'accounts');
     }
 }

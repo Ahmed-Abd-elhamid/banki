@@ -16,10 +16,10 @@ class AccountTransaction extends Model
     protected $guarded = [];
 
     public function account(){
-        $this->hasOne('App\Models\Account');
+        return $this->belongsTo('App\Models\Account');
     }
 
     public function transaction(){
-        $this->hasOne('App\Models\Transaction');
+        return $this->belongsTo('App\Models\Transaction');
     }
 }

@@ -20,11 +20,19 @@ class Account extends Model
     ];
 
     public function bank(){
-        $this->hasOne('App\Models\Bank');
+        return $this->belongsTo('App\Models\Bank');
     }
 
     public function user(){
-        $this->hasOne('App\Models\User');
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function account_transactions(){
+        return $this->hasMany('App\Models\AccountTransaction');
+    }
+
+    public function transactions(){
+        return $this->belongsToMany('App\Models\Transaction', 'account_transactions');
     }
 
     protected static function booted()

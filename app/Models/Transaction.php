@@ -16,11 +16,11 @@ class Transaction extends Model
     protected $guarded = [];
 
     public function account_transactions(){
-        $this->hasMany('App\AccountTransaction');
+        return $this->hasMany('App\Models\AccountTransaction');
     }
 
     public function accounts(){
-        $this->hasManyThrough('App\AccountTransaction', 'App\Account');
+        return $this->belongsToMany('App\Models\Account', 'account_transactions');
     }
 
     protected static function booted()

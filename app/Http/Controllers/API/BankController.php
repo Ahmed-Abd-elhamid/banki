@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use Illuminate\Http\Request;
 
@@ -15,17 +16,7 @@ class BankController extends Controller
     public function index()
     {
         $banks = Bank::all();
-        return response()->view('banks.index', ['banks' => $banks]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return response()->view('banks.create');
+        return response()->json($banks);
     }
 
     /**
@@ -47,18 +38,7 @@ class BankController extends Controller
      */
     public function show(Bank $bank)
     {
-        return response()->view('banks.show', ['bank' => $bank]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Bank $bank)
-    {
-        return response()->view('banks.edit', ['bank' => $bank]);
+        return response()->json($bank);
     }
 
     /**

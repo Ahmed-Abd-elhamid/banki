@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -15,17 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
-        return response()->view('transa$transactions.index', ['transa$transactions' => $transactions]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return response()->view('transactions.create');
+        return response()->json($transactions);
     }
 
     /**
@@ -47,18 +38,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return response()->view('transactions.edit', ['transaction' => $transaction]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaction $transaction)
-    {
-        return response()->view('transactions.edit', ['transaction' => $transaction]);
+        return response()->json($transaction);
     }
 
     /**

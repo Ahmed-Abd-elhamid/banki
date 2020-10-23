@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
 
@@ -15,17 +16,7 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = Account::all();
-        return response()->view('accounts.index', ['accounts' => $accounts]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return response()->view('accounts.create');
+        return response()->json($accounts);
     }
 
     /**
@@ -47,18 +38,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return response()->view('accounts.show', ['account' => $account]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Account $account)
-    {
-        return response()->view('accounts.edit', ['account' => $account]);
+        return response()->json($account);
     }
 
     /**
