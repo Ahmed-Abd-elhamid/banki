@@ -21,5 +21,6 @@ Auth::routes();
 
 Route::resource('banks', 'App\Http\Controllers\BankController');
 Route::resource('accounts', 'App\Http\Controllers\AccountController');
+Route::resource('transactions', 'App\Http\Controllers\TransactionController');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

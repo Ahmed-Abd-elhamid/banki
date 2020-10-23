@@ -14,7 +14,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->view('transactions.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return response()->view('transactions.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return response()->view('transactions.show');
     }
 
     /**
@@ -57,7 +57,7 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return response()->view('transactions.edit');
     }
 
     /**

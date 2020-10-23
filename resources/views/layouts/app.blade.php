@@ -22,15 +22,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+    @yield('css')
 </head>
 <body>
     <div id="app">
         @include('includes.header')
         @include('includes.messages')
-        <main class="py-4">
+        <main class="py-4 container p-4 content">
             @yield('content')
         </main>
         @include('includes.footer')
     </div>
+    @yield('js')
 </body>
 </html>

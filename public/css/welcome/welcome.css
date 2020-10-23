@@ -1,0 +1,14 @@
+.side-content{
+	min-height: 70vh;
+}
+
+.full-image {
+	width: 100%;
+	min-height: 70vh;
+	border-radius: 5px;
+    background-color: black;
+    background-image: url("/img/banking.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -74,7 +74,27 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #f2f5f8;
+}
+
+.content{
+  min-height: 90vh;
+}
+
+.row{
+  background-color: #f7f7f7;
+}
+
+.bg-darkblue{
+  background-color: #003662;
+}
+
+.bg-darkyblue{
+  background-color: #001b31;
+}
+
+.text-darkblue{
+  color: #003662;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
