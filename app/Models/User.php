@@ -42,10 +42,10 @@ class User extends Authenticatable
     ];
 
     public function accounts(){
-        $this->hasMany('App\Account');
+        $this->hasMany('App\Models\Account');
     }
 
     public function banks(){
-        return $this->hasManyThrough('App\Account', 'App\Bank');
+        return $this->hasManyThrough('App\Models\Account', 'App\Models\Bank');
     }
 }

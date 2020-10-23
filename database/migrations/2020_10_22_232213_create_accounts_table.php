@@ -16,9 +16,10 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('account_num')->unique();
-            $table->unsignedDecimal('balance', 30, 4);
+            $table->unsignedDecimal('balance', 60, 2);
             $table->enum('type', ['current', 'saving', 'credit', 'joint']);
             $table->string('currency');
+            $table->boolean('is_active');
             // $table->enum('currency', ['USD', 'EURO', 'EGP', 'SAR', 'YEN']);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('bank_id')->constrained('banks')->onDelete('cascade');
