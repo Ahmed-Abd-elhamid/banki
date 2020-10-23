@@ -45,6 +45,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Account');
     }
 
+    public function account_transactions(){
+        return $this->hasManyThrough('App\Models\AccountTransaction', 'App\Models\Account');
+    }
+
     public function banks(){
         return $this->belongsToMany('App\Models\Bank', 'accounts');
     }

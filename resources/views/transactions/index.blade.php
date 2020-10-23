@@ -30,6 +30,7 @@
 				<th scope="col">Money In</th>
 				<th scope="col">Money Out</th>
 				<th scope="col" colspan="2">Transfered from</th>
+				<th scope="col">More..</th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -41,6 +42,8 @@
 					<td class="text-success">+ {{ $transaction->money_in }}</td>
 					<td class="text-danger">- {{ $transaction->money_out }}</td>
 					<td colspan="2">{{ $transaction->transfer_from }}</td>
+					<td><a class="btn btn-sm btn-primary" href="{{ route('transactions.show', $transaction->id) }}">Show Details</a>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>

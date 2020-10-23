@@ -31,7 +31,6 @@ class Transaction extends Model
 
         static::creating(function ($transaction) {
             $transaction->transaction_num = Transaction::generate_unique_num();
-            // die($transaction);
         });
 
         static::updated(function ($transaction) {

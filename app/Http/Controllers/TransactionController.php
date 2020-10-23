@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -14,7 +15,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $account_transactions = Auth::user()->account_transactions;
+        $transactions = [];
+        foreach($account_transactions as $account_transaction){
+            array_push($transactions, $account_transaction->transaction);
+        }
         return response()->view('transactions.index', ['transactions' => $transactions]);
     }
 
@@ -47,7 +52,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return response()->view('transactions.edit', ['transaction' => $transaction]);
+        return response()->view('transactions.edit', ['transaction' => $transaction, 'account_transactions' => $transaction->account_transactions]);
     }
 
     /**

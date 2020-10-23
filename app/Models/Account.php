@@ -11,12 +11,13 @@ class Account extends Model
 
     protected $table = "accounts";
 
-    protected $fillable = ['account_num', 'balance', 'type', 'currency', 'bank_id', 'user_id'];
+    protected $fillable = ['account_num', 'balance', 'type', 'currency', 'is_active', 'bank_id', 'user_id'];
 
     protected $guarded = [];
 
     protected $attributes = [
         'is_active' => true,
+        'balance' => 0,
     ];
 
     public function bank(){

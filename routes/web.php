@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::resource('banks', 'App\Http\Controllers\BankController')->middleware('auth');
 Route::resource('accounts', 'App\Http\Controllers\AccountController')->middleware('auth');
+Route::put('/accounts/deactivate/{account}', 'App\Http\Controllers\AccountController@deactivate')->name('accounts.deactivate')->middleware('auth');
 Route::resource('transactions', 'App\Http\Controllers\TransactionController')->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

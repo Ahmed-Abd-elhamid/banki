@@ -24,7 +24,9 @@ class StoreAccount extends FormRequest
     public function rules()
     {
         return [
-            //
+            'type' => 'required',
+            'currency' => 'required',
+            'bank' => 'required',
         ];
     }
 }

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Bank;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAccount;
+use App\Http\Requests\UpdateAccount;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -14,7 +18,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::all();
+        $accounts = Account::where('user_id', Auth::user()->id)->get();
         return response()->view('accounts.index', ['accounts' => $accounts]);
     }
 
@@ -25,7 +29,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return response()->view('accounts.create');
+        return response()->view('accounts.create', ['banks' => Bank::all()]);
     }
 
     /**
@@ -36,7 +40,13 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Account::create([
+            'type' => $request->type,
+            'currency' => $request->currency,
+            'bank_id' => $request->bank,
+            'user_id' => Auth::user()->id
+        ]);
+        return redirect()->route('accounts.index')->with('success', 'Created Successfully!');
     }
 
     /**
@@ -58,7 +68,33 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        return response()->view('accounts.edit', ['account' => $account]);
+        if($account->is_active){
+            return response()->view('accounts.edit', ['account' => $account, 'banks' => Bank::all()]);
+        }else{
+            return redirect()->route('accounts.show', $account)->with('alert', 'you must activate it first, before editing!');
+        }
+    }
+
+        /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Account  $account
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivate(Request $request, Account $account)
+    {
+        if($account->is_active){
+            $account->update([
+                'is_active' => false
+            ]);
+            return redirect()->route('accounts.show', $account)->with('success', 'Deactivated Successfully!');
+
+        }else{
+            $account->update([
+                'is_active' => true
+            ]); 
+            return redirect()->route('accounts.show', $account)->with('success', 'Activated Successfully!');
+        }
     }
 
     /**
@@ -70,7 +106,8 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $account->fill($request->all())->save();
+        return redirect()->route('accounts.show', $account)->with('success', 'Updated Successfully!');
     }
 
     /**

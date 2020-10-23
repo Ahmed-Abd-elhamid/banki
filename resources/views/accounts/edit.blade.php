@@ -8,8 +8,8 @@
 <div class="row justify-content-center shadow rounded">
 	<div class="col-12 text-center p-1">
 		<div class="header">
-			<h2 class="animation a1">Welcome Back</h2>
-			<h4 class="animation a2">Log in to your account using email and password</h4>
+			<h2 class="animation a1">Create New Account Now!</h2>
+			<h4 class="animation a2">Easy Way to track all transactions all of the day!</h4>
 		</div>
 	</div>
 </div>
@@ -17,23 +17,64 @@
 <div class="row justify-content-center shadow rounded">
 	<div class="col-md-6 col-sm-12 border rounded p-3">
 		<div class="left">
-			<form class="p-5">
+			<form class="p-5" method="POST" action="{{route('accounts.update', $account)}}" enctype="multipart/form-data"
+				onsubmit="return confirm('Are you sure about Editing this account?');">
+				@csrf
+				{{method_field('PUT')}}
 				<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-						placeholder="Enter email">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-						else.</small>
+					<label for="exampleInputEmail1">Account Type</label>
+					<select class="form-control" name="type" id="type" required>
+						<option value="{{$account->type}}" selected>{{ ucfirst($account->type) }}</option>
+						@if($account->type != 'current')
+							<option value="current">Current</option>
+						@endif
+						@if($account->type != 'saving')
+							<option value="saving">Saving</option>
+						@endif
+						@if($account->type != 'credit')
+							<option value="credit">Credit</option>
+						@endif
+						@if($account->type != 'joint')
+							<option value="joint">Joint</option>
+						@endif
+					</select>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<label for="exampleInputEmail1">Account Bank</label>
+					<select class="form-control" name="bank" id="bank" required>
+						{{-- <option selected disabled readonly>Account Bank</option> --}}
+						@foreach($banks as $bank)
+							@if($account->bank_id != $bank->id)
+								<option value="{{ $bank->id }}">{{ $bank->name }}</option>
+							@else
+								<option value="{{ $bank->id }}" selected>{{ $bank->name }}</option>
+							@endif
+						@endforeach
+					</select>
 				</div>
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Account Currency</label>
+					<select class="form-control" name="currency" id="currency" required>
+						{{-- <option selected disabled readonly>Account Currency</option> --}}
+						<option value="{{$account->currency}}" selected>{{ $account->currency }}</option>
+						@if($account->currency != 'USD')
+							<option value="USD">USD</option>
+						@endif
+						@if($account->currency != 'EURO')
+							<option value="EURO">EURO</option>
+						@endif
+						@if($account->currency != 'EGP')
+							<option value="EGP">EGP</option>
+						@endif
+						@if($account->currency != 'SAR')
+							<option value="SAR">SAR</option>
+						@endif
+						@if($account->currency != 'YEN')
+							<option value="YEN">YEN</option>
+						@endif
+					</select>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-warning text-dark mt-2">Edit</button>
 			</form>
 		</div>
 	</div>

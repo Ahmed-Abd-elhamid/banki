@@ -8,8 +8,8 @@
 <div class="row justify-content-center shadow rounded">
 	<div class="col-12 text-center p-1">
 		<div class="header">
-			<h2 class="animation a1">Welcome Back</h2>
-			<h4 class="animation a2">Log in to your account using email and password</h4>
+			<h2 class="animation a1">Create New Account Now!</h2>
+			<h4 class="animation a2">Easy Way to track all transactions all of the day!</h4>
 		</div>
 	</div>
 </div>
@@ -17,23 +17,40 @@
 <div class="row justify-content-center shadow rounded">
 	<div class="col-md-6 col-sm-12 border rounded p-3">
 		<div class="left">
-			<form class="p-5">
+			<form class="p-5" method="POST" action="{{route('accounts.store')}}" enctype="multipart/form-data"
+				onsubmit="return confirm('Are you sure about creating New account?');">
+				@csrf
 				<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-						placeholder="Enter email">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-						else.</small>
+					<label for="exampleInputEmail1">Account Type</label>
+					<select class="form-control" name="type" id="type" required>
+						{{-- <option selected disabled readonly>Account Type</option> --}}
+						<option value="current">Current</option>
+						<option value="saving">Saving</option>
+						<option value="credit">Credit</option>
+						<option value="joint">Joint</option>
+					</select>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<label for="exampleInputEmail1">Account Bank</label>
+					<select class="form-control" name="bank" id="bank" required>
+						{{-- <option selected disabled readonly>Account Bank</option> --}}
+						@foreach($banks as $bank)
+						<option value="{{ $bank->id }}">{{ $bank->name }}</option>
+						@endforeach
+					</select>
 				</div>
-				<div class="form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Account Currency</label>
+					<select class="form-control" name="currency" id="currency" required>
+						{{-- <option selected disabled readonly>Account Currency</option> --}}
+						<option value="USD">USD</option>
+						<option value="EURO">EURO</option>
+						<option value="EGP">EGP</option>
+						<option value="SAR">SAR</option>
+						<option value="YEN">YEN</option>
+					</select>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary mt-2">Create</button>
 			</form>
 		</div>
 	</div>

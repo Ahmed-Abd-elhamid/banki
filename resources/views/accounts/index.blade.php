@@ -23,34 +23,37 @@
 	<div class="col-10 p-3">
 		<table class="table table-hover">
 			<thead>
-			  <tr>
-				<th scope="col">#</th>
-				<th scope="col" colspan="2">Account Num</th>
-				<th scope="col">Type</th>
-				<th scope="col">Currency</th>
-				<th scope="col">is Active</th>
-				<th scope="col">User</th>
-				<th scope="col">Bank</th>
-			  </tr>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col" colspan="2">Account Num</th>
+					<th scope="col">Type</th>
+					<th scope="col">Currency</th>
+					<th scope="col">is Active</th>
+					<th scope="col">User</th>
+					<th scope="col">Bank</th>
+					<th scope="col">More..</th>
+				</tr>
 			</thead>
 			<tbody>
 				@foreach($accounts as $account)
-				<tr>
-				<th scope="row">{{ $account->id }}</th>
+				<tr class="{{ $account->is_active ? 'alert-success':'alert-danger'}}">
+					<th scope="row">{{ $account->id }}</th>
 					<td colspan="2">{{ $account->account_num }}</td>
 					<td>{{ $account->type }}</td>
 					<td>{{ $account->currency }}</td>
 					@if ($account->is_active)
-						<td class="text-success">Activated</td>
+					<td class="text-success"><strong>Activated</strong></td>
 					@else
-						<td class="text-danger">Deactivated</td>
+					<td class="text-danger"><strong>Deactivated</strong></td>
 					@endif
 					<td>{{ $account->user->name }}</td>
 					<td>{{ $account->bank->name }}</td>
+					<td><a class="btn btn-sm btn-primary" href="{{ route('accounts.show', $account->id) }}">Show Details</a>
+					</td>
 				</tr>
 				@endforeach
 			</tbody>
-		  </table>
+		</table>
 	</div>
 </div>
 @endsection
