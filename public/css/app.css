@@ -84,6 +84,10 @@ body {
 .row{
   background-color: #f7f7f7;
 }
+.nav-link{
+  font-size: 1.15em;
+  font-weight: 500;
+}
 
 .bg-darkblue{
   background-color: #003662;

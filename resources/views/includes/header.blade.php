@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark bg-darkblue shadow-sm">
 	<div class="container">
-		<a class="navbar-brand" href="{{ url('/') }}">
+		<a class="navbar-brand bg-white text-dark rounded p-1 pr-2" href="{{ url('/') }}">
 			<img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid" width="30"> {{ config('app.name', 'Bankey') }}
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -11,7 +11,15 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
-
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('banks.index') }}">Banks</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('accounts.index') }}">Accounts</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('transactions.index') }}">Transactions</a>
+				</li>
 			</ul>
 
 			<!-- Right Side Of Navbar -->
@@ -39,6 +47,9 @@
 						</a>
 						<a class="dropdown-item" href="{{ route('accounts.create') }}">
 							New Account
+						</a>
+						<a class="dropdown-item" href="{{ route('transactions.create') }}">
+							New Transaction
 						</a>
 						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 											 document.getElementById('logout-form').submit();">
