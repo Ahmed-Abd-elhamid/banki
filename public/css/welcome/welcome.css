@@ -12,3 +12,12 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+
+.clients{
+    left: 0;
+    right: 0;
+    position: absolute;
+    /* height: 200px;
+    display: block; */
+}

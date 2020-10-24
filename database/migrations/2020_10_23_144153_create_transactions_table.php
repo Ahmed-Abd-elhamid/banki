@@ -15,9 +15,11 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_num')->unique();
-            $table->enum('type', ['deposite_withdraw', 'transfer']);
+            $table->string('transaction_num');
+            $table->unsignedDecimal('balance', 9, 2);
+            $table->enum('type', ['deposite', 'withdraw', 'transfer']);
             $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
+            $table->unsignedBigInteger('to_account_id')->constrained('accounts')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }

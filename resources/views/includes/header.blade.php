@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-darkblue shadow-sm">
 	<div class="container">
 		<a class="navbar-brand bg-white text-dark rounded p-1 pr-2" href="{{ url('/') }}">
-			<img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid" width="30"> {{ config('app.name', 'Bankey') }}
+			<img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid" width="30"> Bankey
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -48,8 +48,11 @@
 						<a class="dropdown-item" href="{{ route('accounts.create') }}">
 							New Account
 						</a>
-						<a class="dropdown-item" href="{{ route('transactions.create') }}">
-							New Transaction
+						<a class="dropdown-item" href="{{ route('transfer_transactions.create') }}">
+							New Transfer
+						</a>
+						<a class="dropdown-item" href="{{ route('deposite_withdraw_transactions.create') }}">
+							New Deposite_Withdraw
 						</a>
 						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 											 document.getElementById('logout-form').submit();">

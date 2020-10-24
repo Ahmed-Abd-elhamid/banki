@@ -13,9 +13,9 @@
 		</div>
 	</div>
 	<div class="col-2 text-center p-4">
-		<div class="header">
+		{{-- <div class="header">
 			<a class="btn btn-success rounded shadow" href="{{ route('banks.create') }}">New Bank</a>
-		</div>
+		</div> --}}
 	</div>
 </div>
 <hr>

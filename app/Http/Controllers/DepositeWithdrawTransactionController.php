@@ -17,14 +17,14 @@ class DepositeWithdrawTransactionController extends Controller
         //
     }
 
-    /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return response()->view('transactions.deposite_withdraw.create', ['account_numbers' => Account::all()->pluck('account_num')]);
     }
 
     /**
@@ -35,7 +35,7 @@ class DepositeWithdrawTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -5,6 +5,24 @@
 @endsection
 
 @section('content')
+<div class="row justify-content-center shadow rounded">
+	<div class="col-8 text-center p-1 border-right">
+		<div class="header">
+			<h2 class="animation a1">Welcome Back</h2>
+			<h4 class="animation a2">Log in to your account using email and password</h4>
+		</div>
+	</div>
+	<div class="col-2 text-center p-3 mt-1">
+		<div class="header">
+			<a class="btn btn-success rounded shadow" href="{{ route('transfer_transactions.create') }}">Transfer</a>
+		</div>
+	</div>
+	<div class="col-2 text-center p-3 mt-1">
+		<div class="header">
+			<a class="btn btn-success rounded shadow" href="{{ route('deposite_withdraw_transactions.create') }}">deposite_withdraw</a>
+		</div>
+	</div>
+</div>
 <div class="row justify-content-center m-3 p-1 rounded shadow border">
 	<div class="col-10 text-center">
 		<h2>welcome {{ $account->user->name }} to your account</h2>

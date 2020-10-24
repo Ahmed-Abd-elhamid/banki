@@ -19,20 +19,16 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Account');
     }
 
-    public function transactions(){
-        if($this->type == 'deposite_withdraw'){
-            return $this->hasMany('App\Models\DepositeWithdrawTransaction');
-        }elseif($this->type == 'transfer'){
-            return $this->hasMany('App\Models\TransferTransaction');
+    public function can_delete(){
+        $diff = now()->diff($this->created_at);        
+        $hours = $diff->h + ($diff->days*24);
+        
+        if( $hours >= 24){
+            return false;
+        }else{
+            return true;
         }
-    }
-
-    public function accounts(){
-        if($this->type == 'deposite_withdraw'){
-            return $this->belongsToMany('App\Models\Account', 'App\Models\DepositeWithdrawTransaction');
-        }elseif($this->type == 'transfer'){
-            return $this->belongsToMany('App\Models\Account', 'App\Models\TransferTransaction');
-        }
+        
     }
 
     protected static function booted()

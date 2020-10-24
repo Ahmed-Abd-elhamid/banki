@@ -16,7 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return response()->view('transactions.index', ['transactions' => $user->transactions]);
+        return response()->view('transactions.index', ['transactions' => $user->transactions->SortByDesc('id')]);
     }
 
     /**
@@ -37,7 +37,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
     }
 
     /**
@@ -46,8 +46,22 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show($transaction_num)
     {
+        $transactions = Transaction::where('transaction_num', $transaction_num)->get();
+
+        return response()->view('transactions.show', ['transactions' => $transactions, 'transaction_sample' => $transactions->first()]);
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Transaction  $transaction
+     * @return \Illuminate\Http\Response
+     */
+    public function details($transaction)
+    {
+        dd($transaction);
         return response()->view('transactions.show', ['transaction' => $transaction]);
     }
 
@@ -80,8 +94,9 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($transaction_num)
     {
-        //
+        Transaction::where('transaction_num', $transaction_num)->delete();
+        return redirect()->route('transactions.index')->with('success', 'Deleted Successfully!');
     }
 }

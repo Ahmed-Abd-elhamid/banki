@@ -18,7 +18,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::where('user_id', Auth::user()->id)->get();
+        $accounts = Account::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         return response()->view('accounts.index', ['accounts' => $accounts]);
     }
 

@@ -32,14 +32,6 @@ class Account extends Model
         return $this->hasMany('App\Models\Transaction');
     }
 
-    public function deposite_withdraw_transactions_in(){
-        return $this->hasMany('App\Models\DepositeWithdrawTransaction');
-    }
-
-    public function transfer_transactions_in(){
-        return $this->hasMany('App\Models\TransferTransaction');
-    }
-
     protected static function booted()
     {
         static::created(function ($account) {

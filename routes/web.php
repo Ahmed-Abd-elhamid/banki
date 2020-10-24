@@ -19,9 +19,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('banks', 'App\Http\Controllers\BankController')->middleware('auth');
+Route::resource('banks', 'App\Http\Controllers\BankController')->middleware('auth')->only([
+    'index', 'show'
+]);
 Route::resource('accounts', 'App\Http\Controllers\AccountController')->middleware('auth');
 Route::put('/accounts/deactivate/{account}', 'App\Http\Controllers\AccountController@deactivate')->name('accounts.deactivate')->middleware('password.confirm');
-Route::resource('transactions', 'App\Http\Controllers\TransactionController')->middleware('auth');
+
+
+Route::resource('transactions', 'App\Http\Controllers\TransactionController')->middleware('auth')->only([
+    'index', 'show'
+]);
+Route::delete('transactions/{transactions}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
+
+Route::resource('transfer_transactions', 'App\Http\Controllers\TransferTransactionController')->middleware('password.confirm')->only([
+    'create', 'store'
+]);
+Route::resource('deposite_withdraw_transactions', 'App\Http\Controllers\DepositeWithdrawTransactionController')->middleware('password.confirm')->only([
+    'create', 'store'
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
