@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
+use App\Models\DepositeWithdrawTransaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class TransactionController extends Controller
+class DepositeWithdrawTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return response()->view('transactions.index', ['transactions' => $user->transactions]);
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return response()->view('transactions.create');
+        //
     }
 
     /**
@@ -37,39 +35,39 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(DepositeWithdrawTransaction $depositeWithdrawTransaction)
     {
-        return response()->view('transactions.show', ['transaction' => $transaction]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit(DepositeWithdrawTransaction $depositeWithdrawTransaction)
     {
-        return response()->view('transactions.edit', ['transaction' => $transaction, 'transactions' => $transaction->transactions]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, DepositeWithdrawTransaction $depositeWithdrawTransaction)
     {
         //
     }
@@ -77,10 +75,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(DepositeWithdrawTransaction $depositeWithdrawTransaction)
     {
         //
     }

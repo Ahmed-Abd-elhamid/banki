@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\AccountTransaction;
+use App\Models\DepositeWithdrawTransaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountTransactionFactory extends Factory
+class DepositeWithdrawTransactionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = AccountTransaction::class;
+    protected $model = DepositeWithdrawTransaction::class;
 
     /**
      * Define the model's default state.

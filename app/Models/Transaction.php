@@ -11,16 +11,28 @@ class Transaction extends Model
 
     protected $table = "transactions";
 
-    protected $fillable = ['transaction_num', 'type', 'money_in', 'money_out', 'transfer_from'];
+    protected $fillable = ['transaction_num', 'type'];
 
     protected $guarded = [];
 
-    public function account_transactions(){
-        return $this->hasMany('App\Models\AccountTransaction');
+    public function account(){
+        return $this->belongsTo('App\Models\Account');
+    }
+
+    public function transactions(){
+        if($this->type == 'deposite_withdraw'){
+            return $this->hasMany('App\Models\DepositeWithdrawTransaction');
+        }elseif($this->type == 'transfer'){
+            return $this->hasMany('App\Models\TransferTransaction');
+        }
     }
 
     public function accounts(){
-        return $this->belongsToMany('App\Models\Account', 'account_transactions');
+        if($this->type == 'deposite_withdraw'){
+            return $this->belongsToMany('App\Models\Account', 'App\Models\DepositeWithdrawTransaction');
+        }elseif($this->type == 'transfer'){
+            return $this->belongsToMany('App\Models\Account', 'App\Models\TransferTransaction');
+        }
     }
 
     protected static function booted()
@@ -43,9 +55,9 @@ class Transaction extends Model
     }
 
     public static function generate_unique_num(){
-        $transaction_num = mt_rand(100000000000, 999999999999);
+        $transaction_num = (string)mt_rand(100000000000, 999999999999);
         while ( !empty(Transaction::firstWhere('transaction_num', $transaction_num)) ){
-            $transaction_num = mt_rand(100000000000, 999999999999);
+            $transaction_num = (string)mt_rand(100000000000, 999999999999);
         }
         return $transaction_num;
     }

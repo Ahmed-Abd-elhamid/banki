@@ -22,16 +22,11 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
-        $types = ['deposit', 'withdraw', 'transfer'];
-        $type = $types[rand(0,2)];
+        $types = ['deposite_withdraw', 'transfer'];
         return [
             // 'account_num' => $this->generate_unique_num(),
-            'type' => $type,
-            'money_in' => $type != 'withdraw' ? rand(500,10000): 0,
-            'money_out' => $type == 'withdraw' ? rand(500,10000): 0,
-            'transfer_from' => $type == 'transfer' ? Account::inRandomOrder()->first()->account_num: null,
-            // 'bank_id' => Bank::inRandomOrder()->first()->id,
-            // 'user_id' => User::inRandomOrder()->first()->id
+            'type' => $types[rand(0,1)],
+            'account_id' => Account::inRandomOrder()->first()->id
         ];
     }
 }

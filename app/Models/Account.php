@@ -28,12 +28,16 @@ class Account extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function account_transactions(){
-        return $this->hasMany('App\Models\AccountTransaction');
+    public function transactions(){
+        return $this->hasMany('App\Models\Transaction');
     }
 
-    public function transactions(){
-        return $this->belongsToMany('App\Models\Transaction', 'account_transactions');
+    public function deposite_withdraw_transactions_in(){
+        return $this->hasMany('App\Models\DepositeWithdrawTransaction');
+    }
+
+    public function transfer_transactions_in(){
+        return $this->hasMany('App\Models\TransferTransaction');
     }
 
     protected static function booted()
@@ -57,10 +61,9 @@ class Account extends Model
     }
 
     public static function generate_unique_num(){
-        $account_num = mt_rand(100000000000, 999999999999);
+        $account_num = (string)mt_rand(100000000000, 999999999999);
         while ( !empty(Account::firstWhere('account_num', $account_num)) ){
-            $account_num = mt_rand(100000000000, 999999999999);
-            echo "hell";
+            $account_num = (string)mt_rand(100000000000, 999999999999);
         }
         return $account_num;
     }

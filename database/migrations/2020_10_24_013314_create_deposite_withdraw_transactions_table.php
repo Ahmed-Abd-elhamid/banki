@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionsTable extends Migration
+class CreateDepositeWithdrawTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('deposite_withdraw_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_num')->unique();
-            $table->enum('type', ['deposite_withdraw', 'transfer']);
+            $table->decimal('balance', 9, 2);
+            $table->enum('type', ['deposite', 'withdraw']);
             $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
+            $table->foreignId('transaction_id')->constrained('transactions')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('deposite_withdraw_transactions');
     }
 }

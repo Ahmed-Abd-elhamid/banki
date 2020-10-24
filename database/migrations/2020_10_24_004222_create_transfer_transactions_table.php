@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountTransactionsTable extends Migration
+class CreateTransferTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateAccountTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_transactions', function (Blueprint $table) {
+        Schema::create('transfer_transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedDecimal('balance', 9, 2);
             $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
             $table->foreignId('transaction_id')->constrained('transactions')->onDelete('cascade');
             $table->timestamps();
@@ -28,6 +29,6 @@ class CreateAccountTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_transactions');
+        Schema::dropIfExists('transfer_transactions');
     }
 }
