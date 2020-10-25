@@ -16,21 +16,89 @@ class ApiController extends Controller
     {
         $end_points = [
             'users' => [
-                'all' => 'api/users',
-                'show' => 'api/users/{id}',
+                'login' => [
+                    'method' => 'POST',
+                    'params' => '',
+                    'body' => 'email, password',
+                    'end-point' => 'api/users/login',
+                    'description' => 'description',
+                ],
+                'current_user' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/users',
+                    'description' => 'description',
+                ],
+                'show' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/users/{id}',
+                    'description' => 'description',
+                ],
             ],
             'accounts' => [
-                'all' => 'api/accounts',
-                'show' => 'api/accounts/{id}',
+                'index' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/accounts',
+                    'description' => 'description',
+                ],
+                'show' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/accounts/{id}',
+                    'description' => 'description',
+                ],
             ],
             'banks' => [
-                'all' => 'api/banks',
-                'show' => 'api/banks/{id}',
+                'index' => [
+                    'method' => 'GET',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/banks',
+                    'description' => 'description',
+                ],
+                'show' => [
+                    'method' => 'GET',
+                    'params' => '',
+                    'end-point' => 'api/banks/{id}',
+                    'description' => 'description',
+                ],
             ],
             'transactions' => [
-                'all' => 'api/transactions',
-                'by_type' => 'api/transactions?type={type}',
-                'show' => 'api/transactions/{id}',
+                'index' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/transactions',
+                    'description' => 'description',
+                ],
+                'by_type' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => 'type',
+                    'body' => '',
+                    'end-point' => 'api/transactions?type={type}',
+                    'notes' => 'Available {type}: (transfer, deposite, withdraw)',
+                    'description' => 'description',
+                ],
+                'show' => [
+                    'method' => 'GET',
+                    'header' => 'Accept: application/json, Authorization:  Bearer [Api Token]',
+                    'params' => '',
+                    'body' => '',
+                    'end-point' => 'api/transactions/{id}',
+                    'description' => 'description',
+                ],
             ]
         ];
         return response()->json($end_points);

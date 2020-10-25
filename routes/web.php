@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::resource('banks', 'App\Http\Controllers\BankController')->middleware('auth')->only([
@@ -40,3 +36,7 @@ Route::resource('deposite_withdraw_transactions', 'App\Http\Controllers\Deposite
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', function () {
+    return view('welcome');
+});

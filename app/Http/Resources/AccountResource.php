@@ -26,6 +26,13 @@ class AccountResource extends JsonResource
             'updated_at' => $this->updated_at,
         ];
 
-        return $response;
+        $full_msg = [
+            'status' => true,
+            'data' => $response,
+            'messages' => 'Account description',
+            'user' => auth()->user(),
+        ];
+
+        return $full_msg;
     }
 }

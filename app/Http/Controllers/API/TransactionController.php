@@ -48,7 +48,16 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return  new TransactionResource($transaction);
+        if(!is_null(auth()->user()) && $transaction->account->user->id == auth()->user()->id){
+            return  new TransactionResource($transaction);
+        }else{
+            return response()->json([
+                'status' => false,
+                'data' => [],
+                'message' => 'Unauthorized',
+                'user' => auth()->user(),
+              ], 401);
+        }
     }
 
     /**

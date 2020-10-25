@@ -16,7 +16,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = AccountResource::collection(Account::all());
+        $accounts = AccountResource::collection(Account::where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->get());
         return $accounts;
     }
 
@@ -39,7 +39,16 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return new AccountResource($account);
+        if(!is_null(auth()->user()) && $account->user_id == auth()->user()->id){
+            return new AccountResource($account);
+        }else{
+            return response()->json([
+                'status' => false,
+                'data' => [],
+                'message' => 'Unauthorized',
+                'user' => auth()->user(),
+              ], 401);
+        }
     }
 
     /**

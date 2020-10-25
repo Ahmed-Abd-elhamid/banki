@@ -18,11 +18,26 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'accounts' => $this->accounts,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
 
-        return $response;
+        if ($this->token) {
+            $response['token'] = $this->token;
+            // $response['accounts'] = $this->accounts;
+            $response['created_at'] = $this->created_at;
+            $response['updated_at'] = $this->updated_at;
+        }else{
+            // $response['accounts'] = $this->accounts;
+            $response['created_at'] = $this->created_at;
+            $response['updated_at'] = $this->updated_at;
+        }
+
+        $full_msg = [
+            'status' => true,
+            'data' => $response,
+            'messages' => 'User description',
+            'user' => auth()->user(),
+        ];
+
+        return $full_msg;
     }
 }

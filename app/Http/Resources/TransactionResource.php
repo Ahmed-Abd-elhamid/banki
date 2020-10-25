@@ -19,7 +19,6 @@ class TransactionResource extends JsonResource
             'transaction_num' => $this->transaction_num,
             'balance' => $this->type == 'withdraw' ? $this->balance:"- {$this->balance}",
             'type' => $this->type,
-            'my_account' => $this->account,
         ];
 
         if($this->type == 'transfer'){
@@ -31,6 +30,14 @@ class TransactionResource extends JsonResource
             $response['updated_at'] = $this->updated_at;
         }
 
-        return $response;
+
+        $full_msg = [
+            'status' => true,
+            'data' => $response,
+            'messages' => 'Transaction description',
+            'user' => auth()->user(),
+        ];
+
+        return $full_msg;
     }
 }

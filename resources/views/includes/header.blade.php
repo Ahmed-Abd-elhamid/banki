@@ -23,6 +23,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ route('transactions.convert') }}">Converter</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('api.end_points') }}">API End-Points</a>
+				</li>
 			</ul>
 
 			<!-- Right Side Of Navbar -->
