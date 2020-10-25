@@ -18,7 +18,7 @@ if (addHtml != null) {
         let type = document.getElementById("type").value;
         let types = ['deposite', 'withdraw'];
 
-        if (my_account && balance && type && my_account.length == 12 && parseInt(my_account) > 100000000000 && balance > 0 && balance < 1000000 && types.includes(type)) {
+        if (my_account && balance && type && my_account.length == 12 && parseInt(my_account) > 100000000000 && balance > 0 && balance < 10000000 && types.includes(type)) {
             if (items == 1) { displayOrder(true); }
 
             let box = document.createElement("tr");
@@ -33,8 +33,8 @@ if (addHtml != null) {
             items++;
         } else if (my_account.length != 12 || parseInt(my_account) < 100000000000) {
             alert("Wrong Account Number!")
-        } else if (!balance || balance > 1000000 || balance < 0) {
-            alert("The Balance range is between 0:1000000!")
+        } else if (!balance || balance > 10000000 || balance < 0) {
+            alert("The Balance range is between 0:10000000!")
         } else {
             alert("please fill this Transaction Info, to add more..!")
         }

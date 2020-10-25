@@ -74,10 +74,13 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function details($transaction)
+    public function convert(Request $request)
     {
-        dd($transaction);
-        return response()->view('transactions.show', ['transaction' => $transaction]);
+        if(is_null($request->from_currency) || is_null($request->to_currency) || is_null($request->ammount)){
+            return response()->view('transactions.convert', ['ammount' => 0]);
+        }else{
+            return response()->view('transactions.convert', ['result' => Transaction::convert_currency($request->ammount, $request->from_currency, $request->to_currency), 'ammount' => $request->ammount, 'from' => $request->from_currency, 'to' => $request->to_currency]);
+        }
     }
 
     /**

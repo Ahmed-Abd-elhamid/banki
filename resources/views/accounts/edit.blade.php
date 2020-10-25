@@ -60,8 +60,8 @@
 						@if($account->currency != 'USD')
 							<option value="USD">USD</option>
 						@endif
-						@if($account->currency != 'EURO')
-							<option value="EURO">EURO</option>
+						@if($account->currency != 'EUR')
+							<option value="EUR">EUR</option>
 						@endif
 						@if($account->currency != 'EGP')
 							<option value="EGP">EGP</option>
@@ -69,8 +69,20 @@
 						@if($account->currency != 'SAR')
 							<option value="SAR">SAR</option>
 						@endif
-						@if($account->currency != 'YEN')
-							<option value="YEN">YEN</option>
+						@if($account->currency != 'GBP')
+							<option value="GBP">GBP</option>
+						@endif
+						@if($account->currency != 'CAD')
+							<option value="CAD">CAD</option>
+						@endif
+						@if($account->currency != 'JPY')
+							<option value="JPY">JPY</option>
+						@endif
+						@if($account->currency != 'AUD')
+							<option value="AUD">AUD</option>
+						@endif
+						@if($account->currency != 'AED')
+							<option value="AED">AED</option>
 						@endif
 					</select>
 				</div>

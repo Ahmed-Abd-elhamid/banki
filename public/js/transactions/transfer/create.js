@@ -22,7 +22,7 @@ if (addHtml != null) {
             return alert("you can't transfer money on same account!");
         }
 
-        if ((from_account && from_account.length == 12 && parseInt(from_account) > 100000000000) && (from_account != to_account) && (to_account && to_account.length == 12 && parseInt(to_account) > 100000000000) && (balance && balance > 0 && balance < 1000000) && (type && type == 'transfer')) {
+        if ((from_account && from_account.length == 12 && parseInt(from_account) > 100000000000) && (from_account != to_account) && (to_account && to_account.length == 12 && parseInt(to_account) > 100000000000) && (balance && balance > 0 && balance < 10000000) && (type && type == 'transfer')) {
             if (items == 1) { displayOrder(true); }
 
             let box = document.createElement("tr");
@@ -38,7 +38,7 @@ if (addHtml != null) {
         } else if ((from_account.length != 12 || parseInt(from_account) < 100000000000) || (to_account.length != 12 || parseInt(to_account) < 100000000000)) {
             alert("Wrong Account Number!")
         } else if (!balance || balance > 10000000 || balance < 0) {
-            alert("The Balance range is between 0:1000000!")
+            alert("The Balance range is between 0:10000000!")
         } else {
             alert("please fill this Transaction Info, to add more..!")
         }

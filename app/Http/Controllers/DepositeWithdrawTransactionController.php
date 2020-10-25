@@ -53,10 +53,10 @@ class DepositeWithdrawTransactionController extends Controller
                     $transaction = DB::insert('insert into transactions (transaction_num, type, balance, account_id, created_at, updated_at) values (?, ?, ?, ?, ?, ?)',  [ $transaction_num, $request->input('type'.$current_item), $request->input('balance'.$current_item), $my_account->id, $current_date, $current_date]);
 
                     if( $request->input('type'.$current_item) == 'deposite'){
-                        $balance_in = $my_account->balance + $request->input('balance'.$current_item);
+                        $balance_in = $my_account->balance + Transaction::convert_currency($request->input('balance'.$current_item), 'EGP', $my_account->currency);
                         DB::update('update accounts set balance = ? where id = ?', [$balance_in ,$my_account->id]);
                     }else{
-                        $balance_out = $my_account->balance - $request->input('balance'.$current_item);
+                        $balance_out = $my_account->balance - Transaction::convert_currency($request->input('balance'.$current_item), 'EGP', $my_account->currency);
                         if($balance_out <= 0){
                             return DB::rollBack();
                         }

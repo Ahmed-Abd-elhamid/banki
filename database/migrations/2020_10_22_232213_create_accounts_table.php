@@ -20,7 +20,7 @@ class CreateAccountsTable extends Migration
             $table->enum('type', ['current', 'saving', 'credit', 'joint']);
             $table->string('currency');
             $table->boolean('is_active');
-            // $table->enum('currency', ['USD', 'EURO', 'EGP', 'SAR', 'YEN']);
+            // $table->enum('currency', ['USD', 'EUR', 'EGP', 'SAR', 'GBP', 'CAD', 'JPY', 'AUD', 'AED']);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('bank_id')->constrained('banks')->onDelete('cascade');
             $table->timestamps();

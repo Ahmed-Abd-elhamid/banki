@@ -30,6 +30,7 @@ Route::resource('transactions', 'App\Http\Controllers\TransactionController')->m
     'index', 'show'
 ]);
 Route::delete('transactions/{transactions}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
+Route::get('convert', 'App\Http\Controllers\TransactionController@convert')->name('transactions.convert');
 
 Route::resource('transfer_transactions', 'App\Http\Controllers\TransferTransactionController')->middleware('password.confirm')->only([
     'create', 'store'

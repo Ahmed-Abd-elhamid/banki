@@ -43,11 +43,15 @@
 					<label for="exampleInputEmail1">Account Currency</label>
 					<select class="form-control" name="currency" id="currency" required>
 						{{-- <option selected disabled readonly>Account Currency</option> --}}
-						<option value="USD">USD</option>
-						<option value="EURO">EURO</option>
 						<option value="EGP">EGP</option>
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
 						<option value="SAR">SAR</option>
-						<option value="YEN">YEN</option>
+						<option value="GBP">GBP</option>
+						<option value="CAD">CAD</option>
+						<option value="JPY">JPY</option>
+						<option value="AUD">AUD</option>
+						<option value="AUD">AED</option>
 					</select>
 				</div>
 				<button type="submit" class="btn btn-primary mt-2">Create</button>

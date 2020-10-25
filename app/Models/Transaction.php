@@ -57,4 +57,18 @@ class Transaction extends Model
         }
         return $transaction_num;
     }
+
+    public static function convert_currency($amount,$from_currency,$to_currency){
+        $apikey = '79e2e2bb7b26da35810938dc';
+      
+        $from_Currency = urlencode($from_currency);
+      
+        $json = file_get_contents("https://v6.exchangerate-api.com/v6/{$apikey}/latest/{$from_Currency}");
+        $obj = json_decode($json, true);
+        
+        $val = floatval($obj["conversion_rates"]["$to_currency"]);
+        
+        $total = $amount / $val;
+        return $total;
+    }
 }
