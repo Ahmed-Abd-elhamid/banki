@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Auth::routes();
 
-Route::resource('banks', 'App\Http\Controllers\BankController')->middleware('auth')->only([
+Route::resource('banks', 'App\Http\Controllers\BankController')->only([
     'index', 'show'
 ]);
 Route::resource('accounts', 'App\Http\Controllers\AccountController')->middleware('auth');

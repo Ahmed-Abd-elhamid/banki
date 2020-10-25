@@ -1,5 +1,6 @@
 # Banki System
-
+	Our concern is to help the clients to deal with their financial accounts easily, and Serve most of banking transaction on one click through online banking.
+	
 ## Prerequisites
 
 - [node.js & npm](https://nodejs.org/)
@@ -45,7 +46,7 @@ You can now access the Web app at http://localhost:8000
 
 1. Config
     ```sh
-    $ docker-composer.yml
+    docker-composer.yml and .env DB_Host: db
     ```
 2. Build
     ```sh

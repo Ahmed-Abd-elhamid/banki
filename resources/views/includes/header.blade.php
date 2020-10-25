@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-darkblue shadow-sm">
 	<div class="container">
-		<a class="navbar-brand bg-white text-dark rounded p-1 pr-2" href="{{ url('/') }}">
+		<a class="navbar-brand bg-white text-dark rounded p-1 pr-2 hvr-grow-shadow" href="{{ url('/') }}">
 			<img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid" width="30"> Bankey
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -12,19 +12,19 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('banks.index') }}">Banks</a>
+					<a class="nav-link hvr-sink" href="{{ route('banks.index') }}">Banks</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('accounts.index') }}">Accounts</a>
+					<a class="nav-link hvr-sink" href="{{ route('accounts.index') }}">Accounts</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('transactions.index') }}">Transactions</a>
+					<a class="nav-link hvr-sink" href="{{ route('transactions.index') }}">Transactions</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('transactions.convert') }}">Converter</a>
+					<a class="nav-link hvr-sink" href="{{ route('transactions.convert') }}">Converter</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('api.end_points') }}">API End-Points</a>
+					<a class="nav-link hvr-sink" href="{{ route('api.end_points') }}">API End-Points</a>
 				</li>
 			</ul>
 
