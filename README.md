@@ -33,11 +33,11 @@ Please check the official laravel installation guide for server requirements bef
     ```sh
     $ php artisan migrate:refresh --seed
     ```
-
-Start the local development server
-    ```
+6. Start the local development server
+    ```sh
     php artisan serve
     ```
+
 You can now access the Web app at http://localhost:8000
 .. and access the Api end-points at http://localhost:8000/api
 .. and access the grapQL at http://localhost:8000/graphql
