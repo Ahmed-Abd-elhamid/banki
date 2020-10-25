@@ -28,6 +28,10 @@ class AccountType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The balance of the account',
             ],
+            'transactions' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The transactions of the account',
+            ],
 			'created_at' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The created_at of the transaction',

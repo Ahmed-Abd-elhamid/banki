@@ -30,7 +30,7 @@ class TransactionFactory extends Factory
         return [
             // 'account_num' => $this->generate_unique_num(),
             'type' => $type,
-            'balance' => rand(100,100000),
+            'balance' => rand(1000,10000),
             'account_id' => Account::inRandomOrder()->first()->id,
             'to_account_id' => $type == 'transfer' ? Account::inRandomOrder()->first()->id: null,
             'created_at' => $date,

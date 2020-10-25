@@ -16,7 +16,7 @@ class Transaction extends Model
     protected $guarded = [];
 
     public function account(){
-        return $this->belongsTo('App\Models\Account');
+        return $this->belongsTo('App\Models\Account', 'account_id');
     }
 
     public function to_account(){
