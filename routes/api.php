@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::apiResource('users', 'App\Http\Controllers\API\UserController')->only([
+    'index', 'show'
+]);
 Route::apiResource('banks', 'App\Http\Controllers\API\BankController')->only([
     'index', 'show'
 ]);

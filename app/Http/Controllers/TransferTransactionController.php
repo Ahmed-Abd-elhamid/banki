@@ -50,9 +50,6 @@ class TransferTransactionController extends Controller
 
                     $account_to = Account::firstWhere('account_num', $request->input('to_account'.$current_item));
                     $account_from = Account::firstWhere('account_num', $request->input('from_account'.$current_item));
-
-                    $transaction = DB::insert('insert into transactions (transaction_num, type, balance, account_id, to_account_id ,created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)',  [ $transaction_num, 'transfer', $request->input('balance'.$current_item), $account_from->id, $account_to->id, $current_date, $current_date]);
-
                     
                     $balance_out = $account_from->balance - Transaction::convert_currency($request->input('balance'.$current_item), 'EGP', $account_from->currency);;
                     $balance_in = $account_to->balance + Transaction::convert_currency($request->input('balance'.$current_item), 'EGP', $account_to->currency);;
@@ -61,6 +58,8 @@ class TransferTransactionController extends Controller
                         return DB::rollBack();
                     }
 
+                    $transaction = DB::insert('insert into transactions (transaction_num, type, balance, account_id, to_account_id ,created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)',  [ $transaction_num, 'transfer', $request->input('balance'.$current_item), $account_from->id, $account_to->id, $current_date, $current_date]);
+                    
                     DB::update('update accounts set balance = ? where id = ?', [$balance_out ,$account_from->id]);
                     DB::update('update accounts set balance = ? where id = ?', [$balance_in ,$account_to->id]);
                 }

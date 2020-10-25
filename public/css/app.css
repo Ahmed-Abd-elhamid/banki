@@ -10946,3 +10946,11 @@ a.text-dark:focus {
   border-radius: 3px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.4, rgb(122, 153, 217)), color-stop(0.7, rgb(49, 112, 190)), color-stop(0.8, rgb(28, 58, 148)));
 }
+
+.border-3 {
+    border-width:3px !important;
+}
+
+.border-5 {
+    border-width:5px !important;
+}

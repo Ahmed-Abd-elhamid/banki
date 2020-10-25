@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 
-class ApiController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,26 +16,8 @@ class ApiController extends Controller
      */
     public function index()
     {
-        $end_points = [
-            'users' => [
-                'all' => 'api/users',
-                'show' => 'api/users/{id}',
-            ],
-            'accounts' => [
-                'all' => 'api/accounts',
-                'show' => 'api/accounts/{id}',
-            ],
-            'banks' => [
-                'all' => 'api/banks',
-                'show' => 'api/banks/{id}',
-            ],
-            'transactions' => [
-                'all' => 'api/transactions',
-                'by_type' => 'api/transactions?type={type}',
-                'show' => 'api/transactions/{id}',
-            ]
-        ];
-        return response()->json($end_points);
+        $users = UserResource::collection(User::all());
+        return $users;
     }
 
     /**
@@ -50,22 +34,22 @@ class ApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -73,10 +57,10 @@ class ApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }

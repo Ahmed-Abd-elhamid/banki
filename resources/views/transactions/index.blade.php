@@ -33,19 +33,21 @@
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr class="text-center">
 						<th scope="col">#</th>
 						<th scope="col" colspan="2">Transaction Num</th>
 						<th scope="col">Type</th>
 						<th scope="col">Balacne</th>
-						<th scope="col">From Account</th>
+						<th scope="col" colspan="2">Account Number</th>
 						<th scope="col">More..</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($transactions as $transaction)
-					<tr
-						class="{{ $transaction->type == 'transfer' ? 'alert-warning':''}}{{ $transaction->type == 'deposite' ? 'alert-success':''}}{{ $transaction->type == 'withdraw' ? 'alert-danger':''}}">
+					@php
+						$current_transactions = $transaction->transaction_num;
+					@endphp
+					<tr class="{{ $transaction->type == 'transfer' ? 'alert-warning':''}}{{ $transaction->type == 'deposite' ? 'alert-success':''}}{{ $transaction->type == 'withdraw' ? 'alert-danger':''}}">
 						<td>{{ $transaction->id }}</td>
 						<td colspan="2">{{ $transaction->transaction_num }}</td>
 						<td
@@ -56,11 +58,14 @@
 						@else
 						<td class="text-danger"><strong>-</strong>{{ $transaction->balance }}</td>
 						@endif
-						<td>{{ $transaction->account->account_num }}</td>
+				<td colspan="2">{{ $transaction->account->account_num }}{{$transaction->type == 'transfer' ? " >> ".$transaction->to_account->account_num:''}}</td>
 						<td><a class="btn btn-sm btn-primary"
 								href="{{ route('transactions.show', $transaction->transaction_num) }}">Show Details</a>
 						</td>
 					</tr>
+					@php
+						$previous_transactions = $transaction->transaction_num;
+					@endphp
 					@endforeach
 				</tbody>
 			</table>
