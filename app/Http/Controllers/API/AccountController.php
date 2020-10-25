@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
+use App\Http\Resources\AccountResource;
 
 class AccountController extends Controller
 {
@@ -15,8 +16,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::all();
-        return response()->json($accounts);
+        $accounts = AccountResource::collection(Account::all());
+        return $accounts;
     }
 
     /**
@@ -38,7 +39,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return response()->json($account);
+        return new AccountResource($account);
     }
 
     /**

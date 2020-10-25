@@ -18,7 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('banks', 'App\Http\Controllers\API\BankController');
-Route::apiResource('accounts', 'App\Http\Controllers\API\AccountController');
-Route::apiResource('transactions', 'App\Http\Controllers\API\TransactionController');
+Route::apiResource('banks', 'App\Http\Controllers\API\BankController')->only([
+    'index', 'show'
+]);
+Route::apiResource('accounts', 'App\Http\Controllers\API\AccountController')->only([
+    'index', 'show'
+]);
+Route::apiResource('transactions', 'App\Http\Controllers\API\TransactionController')->only([
+    'index', 'show'
+]);
 
+Route::get('/', 'App\Http\Controllers\API\ApiController@index');

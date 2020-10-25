@@ -32,11 +32,23 @@ if (addHtml != null) {
             document.getElementById('items').value = items;
             items++;
         } else if (my_account.length != 12 || parseInt(my_account) < 100000000000) {
-            alert("Wrong Account Number!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Wrong Account Number!",
+            });
         } else if (!balance || balance > 10000000 || balance < 0) {
-            alert("The Balance range is between 0:10000000!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "The Balance range is between 0:10000000!",
+            });
         } else {
-            alert("please fill this Transaction Info, to add more..!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Please fill this Transaction Info, to add more..!",
+            });
         }
 
     }
@@ -82,7 +94,7 @@ if (addHtml != null) {
 }
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('.my_account').select2({
         theme: "classic"
     });

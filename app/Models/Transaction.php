@@ -19,6 +19,14 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Account');
     }
 
+    public function to_account(){
+        if($this->type == 'transfer'){
+            return $this->belongsTo('App\Models\Account', 'to_account_id');
+        }else{
+            return null;
+        }
+    }
+
     public function can_delete(){
         $diff = now()->diff($this->created_at);        
         $hours = $diff->h + ($diff->days*24);

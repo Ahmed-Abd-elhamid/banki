@@ -19,7 +19,11 @@ if (addHtml != null) {
         let type = document.getElementById("type").value;
 
         if (from_account == to_account) {
-            return alert("you can't transfer money on same account!");
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "you can't transfer money on same account!",
+              })
         }
 
         if ((from_account && from_account.length == 12 && parseInt(from_account) > 100000000000) && (from_account != to_account) && (to_account && to_account.length == 12 && parseInt(to_account) > 100000000000) && (balance && balance > 0 && balance < 10000000) && (type && type == 'transfer')) {
@@ -36,11 +40,23 @@ if (addHtml != null) {
             document.getElementById('items').value = items;
             items++;
         } else if ((from_account.length != 12 || parseInt(from_account) < 100000000000) || (to_account.length != 12 || parseInt(to_account) < 100000000000)) {
-            alert("Wrong Account Number!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Wrong Account Number!",
+              });
         } else if (!balance || balance > 10000000 || balance < 0) {
-            alert("The Balance range is between 0:10000000!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "The Balance range is between 0:10000000!",
+              });
         } else {
-            alert("please fill this Transaction Info, to add more..!")
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Please fill this Transaction Info, to add more..!",
+              });
         }
 
     }

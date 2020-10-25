@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bank;
 use Illuminate\Http\Request;
-use App\Http\Resources\BankResource;
 
-class BankController extends Controller
+class ApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,22 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = BankResource::collection(Bank::all());
-        return $banks;
+        $end_points = [
+            'accounts' => [
+                'all' => 'api/accounts',
+                'show' => 'api/accounts/{id}',
+            ],
+            'banks' => [
+                'all' => 'api/banks',
+                'show' => 'api/banks/{id}',
+            ],
+            'transactions' => [
+                'all' => 'api/transactions',
+                'by_type' => 'api/transactions?type={type}',
+                'show' => 'api/transactions/{id}',
+            ]
+        ];
+        return response()->json($end_points);
     }
 
     /**
@@ -34,22 +46,22 @@ class BankController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Bank $bank)
+    public function show($id)
     {
-        return new BankResource($bank);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bank  $bank
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -57,10 +69,10 @@ class BankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bank $bank)
+    public function destroy($id)
     {
         //
     }

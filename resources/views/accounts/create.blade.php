@@ -65,5 +65,5 @@
 @endsection
 
 @section('js')
-
+<script src="{{ asset('js/accounts/create.js') }}"></script>
 @endsection
