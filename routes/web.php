@@ -25,7 +25,7 @@ Route::put('/accounts/deactivate/{account}', 'App\Http\Controllers\AccountContro
 Route::resource('transactions', 'App\Http\Controllers\TransactionController')->middleware('auth')->only([
     'index', 'show'
 ]);
-Route::delete('transactions/{transactions}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
+Route::delete('transactions/{transaction}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
 Route::get('convert', 'App\Http\Controllers\TransactionController@convert')->name('transactions.convert');
 
 Route::resource('transfer_transactions', 'App\Http\Controllers\TransferTransactionController')->middleware('password.confirm')->only([

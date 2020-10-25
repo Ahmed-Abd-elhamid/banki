@@ -27,7 +27,7 @@ class DepositeWithdrawTransactionController extends Controller
      */
     public function create()
     {
-        $user_accounts = Account::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get(['id', 'account_num']);
+        $user_accounts = Account::where('user_id', Auth::user()->id)->where('is_active', 1)->orderBy('id', 'DESC')->get(['id', 'account_num']);
 
         return response()->view('transactions.deposite_withdraw.create', ['account_numbers' => $user_accounts]);
     }

@@ -61,11 +61,15 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show($transaction_num)
+    public function show(Transaction $transaction)
     {
-        $transactions = Transaction::where('transaction_num', $transaction_num)->get();
+        if(!is_null(Auth::user()) && $transaction->account->user->id == Auth::user()->id){
+            $transactions = Transaction::where('transaction_num', $transaction->transaction_num)->get();
 
-        return response()->view('transactions.show', ['transactions' => $transactions, 'transaction_sample' => $transactions->first()]);
+            return response()->view('transactions.show', ['transactions' => $transactions, 'transaction_sample' => $transaction]);
+        }else{
+            return redirect()->route('transactions.index')->with('alert', 'Unauthorized!');
+        }
     }
 
         /**
@@ -112,9 +116,17 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy($transaction_num)
+    public function destroy(Transaction $transaction)
     {
-        Transaction::where('transaction_num', $transaction_num)->delete();
-        return redirect()->route('transactions.index')->with('success', 'Deleted Successfully!');
+        if(!is_null(Auth::user()) && $transaction->account->user->id == Auth::user()->id){
+            if(!$transaction->can_delete()){
+                return redirect()->route('transactions.index')->with('alert', 'Out of Date!');
+            }
+            Transaction::where('transaction_num', $transaction->transaction_num)->delete();
+            return redirect()->route('transactions.index')->with('success', 'Deleted Successfully!');
+        }else{
+            return redirect()->route('transactions.index')->with('alert', 'Unauthorized!');
+        }
+
     }
 }

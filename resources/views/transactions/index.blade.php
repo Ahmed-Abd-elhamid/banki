@@ -9,7 +9,7 @@
 	<div class="col-lg-6 col-sm-12 text-center p-1 border-right">
 		<div class="header">
 			<h2 class="animation a1">Welcome Back</h2>
-			<h4 class="animation a2">Log in to your account using email and password</h4>
+			<h5 class="animation a2">Your transactions</h5>
 		</div>
 	</div>
 	<div class="col-lg-3 col-sm-5 text-center p-3 mt-3">
@@ -60,7 +60,7 @@
 						@endif
 				<td colspan="2">{{ $transaction->account->account_num }}{{$transaction->type == 'transfer' ? " >> ".$transaction->to_account->account_num:''}}</td>
 						<td><a class="btn btn-sm btn-primary"
-								href="{{ route('transactions.show', $transaction->transaction_num) }}">Show Details</a>
+								href="{{ route('transactions.show', $transaction) }}">Show Details</a>
 						</td>
 					</tr>
 					@php

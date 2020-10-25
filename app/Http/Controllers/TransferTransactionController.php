@@ -27,9 +27,9 @@ class TransferTransactionController extends Controller
      */
     public function create()
     {
-        $user_accounts = Account::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get(['id', 'account_num']);
+        $user_accounts = Account::where('user_id', Auth::user()->id)->where('is_active', 1)->orderBy('id', 'DESC')->get(['id', 'account_num']);
 
-        return response()->view('transactions.transfer.create', ['account_numbers' => Account::all(['id', 'account_num']), 'user_accounts' => $user_accounts]);
+        return response()->view('transactions.transfer.create', ['account_numbers' => Account::where('is_active', 1)->get(['id', 'account_num']), 'user_accounts' => $user_accounts]);
     }
 
     /**

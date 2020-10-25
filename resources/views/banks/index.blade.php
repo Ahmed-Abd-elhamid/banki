@@ -8,8 +8,7 @@
 <div class="row justify-content-center shadow rounded">
 	<div class="col-10 text-center p-1 border-right">
 		<div class="header">
-			<h2 class="animation a1">Welcome Back</h2>
-			<h4 class="animation a2">Log in to your account using email and password</h4>
+			<h2 class="animation a1">Banks</h2>
 		</div>
 	</div>
 	<div class="col-2 text-center p-4">

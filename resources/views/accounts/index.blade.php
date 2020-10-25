@@ -9,7 +9,7 @@
 	<div class="col-10 text-center p-1 border-right">
 		<div class="header">
 			<h2 class="animation a1">Welcome Back</h2>
-			<h4 class="animation a2">Log in to your account using email and password</h4>
+			<h4 class="animation a2">All your Accounts</h4>
 		</div>
 	</div>
 	<div class="col-2 text-center p-4">

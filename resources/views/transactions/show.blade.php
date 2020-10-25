@@ -11,7 +11,7 @@
 	</div>
 	@if($transaction_sample->can_delete())
 	<div class="col-2 p-3 text-center">
-		<form method="POST" action="{{route('transactions.destroy', $transaction_sample->transaction_num)}}"
+		<form method="POST" action="{{route('transactions.destroy', $transaction_sample)}}"
 			enctype="multipart/form-data"
 			onsubmit="return confirm('Do you want to change the account activation mode?');">
 			@csrf

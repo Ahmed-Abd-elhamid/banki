@@ -57,7 +57,12 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return response()->view('accounts.show', ['account' => $account]);
+        if(!is_null(Auth::user()) && $account->user_id == Auth::user()->id){
+            return response()->view('accounts.show', ['account' => $account]);
+        }else{
+            return redirect()->route('accounts.index');
+        }
+
     }
 
     /**
@@ -68,10 +73,14 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        if($account->is_active){
-            return response()->view('accounts.edit', ['account' => $account, 'banks' => Bank::all()]);
+        if(!is_null(Auth::user()) && $account->user_id == Auth::user()->id){
+            if($account->is_active){
+                return response()->view('accounts.edit', ['account' => $account, 'banks' => Bank::all()]);
+            }else{
+                return redirect()->route('accounts.show', $account)->with('alert', 'you must activate it first, before editing!');
+            }
         }else{
-            return redirect()->route('accounts.show', $account)->with('alert', 'you must activate it first, before editing!');
+            return redirect()->route('accounts.index')->with('alert', 'Unauthorized!');
         }
     }
 
