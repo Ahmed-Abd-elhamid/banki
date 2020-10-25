@@ -38,9 +38,11 @@ Please check the official laravel installation guide for server requirements bef
     php artisan serve
     ```
 
-You can now access the Web app at http://localhost:8000
-.. and access the Api end-points at http://localhost:8000/api
-.. and access the grapQL at http://localhost:8000/graphql
+    a. You can now access the Web app at http://localhost:8000
+
+    b. Access the Api end-points at http://localhost:8000/api
+
+    c. Access the grapQL at http://localhost:8000/graphql
 
 ## Docker Container
 
