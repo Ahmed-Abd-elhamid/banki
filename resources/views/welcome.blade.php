@@ -32,21 +32,21 @@
 <div class="row justify-content-center bg-darkblue text-white p-2 pb-5">
 	<h1 class="col-12 text-center">Our Clients</h1>
 	<hr>
-	<div class="col-lg-3 col-md-10 m-4 text-center border rounded shadow hvr-bounce-in bg-white">
-		<h2 class="p-1 bg-darkblue mt-2 rounded shadow text-white">CIB</h2>
-		<div style="height: 200px;">
+	<div class="col-lg-3 col-md-8 m-4 p-2 text-center border rounded shadow hvr-float bg-white">
+		<h1 class="p-1 bg-darkblue mt-2 rounded shadow text-white">CIB</h1>
+		<div style="height: 300px;">
 			<img src="img/banks/cib.svg" alt="cib" class="img-fluid circle-rounded" height="180">
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-10 m-4 text-center border rounded shadow hvr-bounce-in bg-white">
-		<h2 class="p-1 bg-darkblue mt-2 rounded shadow text-white mb-5">QNB</h2>
-		<div style="height: 200px;">
+	<div class="col-lg-3 col-md-8 m-4 p-2 text-center border rounded shadow hvr-float bg-white">
+		<h1 class="p-1 bg-darkblue mt-2 rounded shadow text-white mb-5">QNB</h1>
+		<div style="height: 300px;">
 			<img src="img/banks/qnb.png" alt="qnb" class="img-fluid circle-rounded" height="180">
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-10 m-4 text-center border rounded shadow hvr-bounce-in bg-white">
-		<h2 class="p-1 bg-darkblue mt-2 rounded shadow text-white mb-4">HBCS</h2>
-		<div style="height: 200px;">
+	<div class="col-lg-3 col-md-8 m-4 p-2 text-center border rounded shadow hvr-float bg-white">
+		<h1 class="p-1 bg-darkblue mt-2 rounded shadow text-white mb-4">HBCS</h1>
+		<div style="height: 300px;">
 			<img src="img/banks/hsbc.png" alt="hsbc" class="img-fluid circle-rounded" height="180">
 		</div>
 	</div>
