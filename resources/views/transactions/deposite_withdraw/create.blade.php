@@ -19,10 +19,10 @@
 		<div>
 			<h2 class="shadow-lg rounded text-center text-white bg-darkblue p-2 mb-3">Add Transaction</h2>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Account Num</label>
-				<select class="form-control account_from" name="to_account" id="to_account" required autocomplete="on">
+				<label for="exampleInputEmail1">With Account</label>
+				<select class="form-control my_account" name="my_account" id="my_account" required autocomplete="on">
 					@foreach($account_numbers as $account_num)
-					<option value="{{ $account_num }}">{{ $account_num }}</option>
+					<option value="{{ $account_num->account_num }}">{{ $account_num->account_num }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -32,7 +32,6 @@
 					{{-- <option selected disabled readonly>Account Currency</option> --}}
 					<option value="deposite">Deposit</option>
 					<option value="withdraw">Withdraw</option>
-					<option value="transfer">Transfer</option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -90,5 +89,5 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('js/transactions/create.js') }}" defer></script>
+<script src="{{ asset('js/transactions/deposite_withdraw/create.js') }}" defer></script>
 @endsection

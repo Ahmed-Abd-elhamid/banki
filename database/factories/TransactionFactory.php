@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Account;
+use DateTime;
 
 class TransactionFactory extends Factory
 {
@@ -22,6 +23,8 @@ class TransactionFactory extends Factory
      */
     public function definition()
     {
+        $dates = [now(), new DateTime('-1 hour'), new DateTime('-1 day'), new DateTime('-1 week'), new DateTime('-1 month')];
+        $date = $dates[rand(0,4)];
         $types = ['deposite', 'withdraw', 'transfer'];
         $type = $types[rand(0,2)];
         return [
@@ -29,7 +32,9 @@ class TransactionFactory extends Factory
             'type' => $type,
             'balance' => rand(100,100000),
             'account_id' => Account::inRandomOrder()->first()->id,
-            'to_account_id' => $type == 'transfer' ? Account::inRandomOrder()->first()->id: null
+            'to_account_id' => $type == 'transfer' ? Account::inRandomOrder()->first()->id: null,
+            'created_at' => $date,
+            'updated_at' => $date
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class TransactionController extends Controller
 {
@@ -13,10 +14,24 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        return response()->view('transactions.index', ['transactions' => $user->transactions->SortByDesc('id')]);
+        $transactions = $user->transactions;
+        if ($request->date && !is_null($request->date)){
+            if($request->date == 'hour'){
+                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 hour'));
+            }elseif($request->date == 'day'){
+                    $transactions = $transactions->where('created_at', '>=', new DateTime('-1 day'));
+            }elseif($request->date == 'week'){
+                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 week'));
+            }elseif($request->date == 'month'){
+                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 month'));
+            }elseif($request->date == 'year'){
+                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 year'));
+            }
+        }
+        return response()->view('transactions.index', ['transactions' => $transactions->SortByDesc('id')]);
     }
 
     /**

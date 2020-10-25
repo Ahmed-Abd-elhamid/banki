@@ -13,25 +13,25 @@ if (addHtml != null) {
 
     function addTransaction() {
 
-        let account_num = document.getElementById("account_num").value;
+        let my_account = document.getElementById("my_account").value;
         let balance = document.getElementById("balance").value;
         let type = document.getElementById("type").value;
-        let types = ['deposite', 'withdraw', 'transfer']
+        let types = ['deposite', 'withdraw'];
 
-        if (account_num && balance && type && account_num.length == 12 && parseInt(account_num) > 100000000000 && balance > 0 && balance < 1000000 && types.includes(type)) {
+        if (my_account && balance && type && my_account.length == 12 && parseInt(my_account) > 100000000000 && balance > 0 && balance < 1000000 && types.includes(type)) {
             if (items == 1) { displayOrder(true); }
 
             let box = document.createElement("tr");
             box.id = `row-${items}`;
             box.style.opacity = "0.8";
 
-            let html = `<td colspan="2"><input type="text" class="form-control text-center" value="${account_num}" name="account_num${items}" id="account_num${items}" readonly ></td><td><input type="text" class="form-control text-center" value="${type}" name="type${items}" id="type${items}" readonly ></td><td><input type="number" class="form-control text-center" value="${balance}" name="balance${items}" id="balance${items}" readonly>`
+            let html = `<td colspan="2"><input type="text" class="form-control text-center" value="${my_account}" name="my_account${items}" id="my_account${items}" readonly ></td><td><input type="text" class="form-control text-center" value="${type}" name="type${items}" id="type${items}" readonly ></td><td><input type="number" class="form-control text-center" value="${balance}" name="balance${items}" id="balance${items}" readonly>`
 
             box.innerHTML = html;
             addHtml.append(box);
             document.getElementById('items').value = items;
             items++;
-        } else if (account_num.length != 12 || parseInt(account_num) < 100000000000) {
+        } else if (my_account.length != 12 || parseInt(my_account) < 100000000000) {
             alert("Wrong Account Number!")
         } else if (!balance || balance > 1000000 || balance < 0) {
             alert("The Balance range is between 0:1000000!")
@@ -83,7 +83,7 @@ if (addHtml != null) {
 
 
 $(document).ready(function() {
-    $('.account_from').select2({
+    $('.my_account').select2({
         theme: "classic"
     });
 });

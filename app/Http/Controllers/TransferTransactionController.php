@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Transaction;
-use App\Models\TransferTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -53,9 +52,25 @@ class TransferTransactionController extends Controller
                     $account_from = Account::firstWhere('account_num', $request->input('from_account'.$current_item));
 
                     $transaction = DB::insert('insert into transactions (transaction_num, type, balance, account_id, to_account_id ,created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)',  [ $transaction_num, 'transfer', $request->input('balance'.$current_item), $account_from->id, $account_to->id, $current_date, $current_date]);
+
+                    $balance_out = $account_from->balance - $request->input('balance'.$current_item);
+                    $balance_in = $account_to->balance + $request->input('balance'.$current_item);
+
+                    if($balance_out <= 0){
+                        return DB::rollBack();
+                    }
+
+                    DB::update('update accounts set balance = ? where id = ?', [$balance_out ,$account_from->id]);
+                    DB::update('update accounts set balance = ? where id = ?', [$balance_in ,$account_to->id]);
                 }
             });
-            return redirect()->route('transactions.index')->with('success', 'Created Successfully!');
+
+            if ( empty(Transaction::firstWhere('transaction_num', $transaction_num)) ){
+                return redirect()->route('transfer_transactions.create')->with('alert', 'Unbalanced balance!');
+            }else{
+                return redirect()->route('transactions.index')->with('success', 'Created Successfully!');
+            }
+            
         }else{
             return redirect()->route('transfer_transactions.create')->with('alert', 'Some Data is invalid!');
         }        

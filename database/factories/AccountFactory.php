@@ -29,7 +29,7 @@ class AccountFactory extends Factory
         $currencies = ['USD', 'EURO', 'EGP', 'SAR', 'YEN'];
         return [
             // 'account_num' => $this->generate_unique_num(),
-            'balance' => rand(1000,1000),
+            'balance' => rand(100000,100000000),
             'type' => $types[rand(0,3)],
             'currency' => $currencies[rand(0,4)],
             'bank_id' => Bank::inRandomOrder()->first()->id,
