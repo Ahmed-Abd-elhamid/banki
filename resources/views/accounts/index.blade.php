@@ -59,11 +59,11 @@
 		</div>
 	</div>
 </div>
-<div class="row justify-content-center">
+{{-- <div class="row justify-content-center">
 	<div class="col-10 p-auto justify-content-center">
 		<p class="justify-content-center">{{ $accounts->links("pagination::bootstrap-4") }}</p>
 	</div>
-</div>
+</div> --}}
 @endsection
 
 @section('js')

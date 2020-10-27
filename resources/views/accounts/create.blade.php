@@ -32,7 +32,7 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Account Bank</label>
-					<select class="form-control" name="bank" id="bank" required>
+					<select class="form-control" name="bank_id" id="bank_id" required>
 						{{-- <option selected disabled readonly>Account Bank</option> --}}
 						{{-- <option value="200">test</option> --}}
 						@foreach($banks as $bank)

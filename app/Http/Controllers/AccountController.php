@@ -7,10 +7,18 @@ use App\Models\Bank;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAccount;
 use App\Http\Requests\UpdateAccount;
+use App\Repository\Eloquent\AccountRepository;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
+    private $accountRepository;
+  
+    public function __construct(AccountRepository $accountRepository)
+    {
+        $this->accountRepository = $accountRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +26,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(8);
+        $accounts = $this->accountRepository->all_by_user(Auth::user());
         return response()->view('accounts.index', ['accounts' => $accounts]);
     }
 
@@ -47,6 +55,8 @@ class AccountController extends Controller
             'bank_id' => $request->bank,
             'user_id' => Auth::user()->id
         ]);
+        // dd($request->request);
+        // $this->accountRepository->create($request);
         return redirect()->route('accounts.index')->with('success', 'Created Successfully!');
     }
 
@@ -58,12 +68,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        if(!is_null(Auth::user()) && $account->user_id == Auth::user()->id){
-            return response()->view('accounts.show', ['account' => $account]);
-        }else{
-            return redirect()->route('accounts.index');
-        }
-
+        return $this->accountRepository->auth_find($account ,Auth::user());
     }
 
     /**
@@ -93,18 +98,8 @@ class AccountController extends Controller
      */
     public function deactivate(Request $request, Account $account)
     {
-        if($account->is_active){
-            $account->update([
-                'is_active' => false
-            ]);
-            return redirect()->route('accounts.show', $account)->with('success', 'Deactivated Successfully!');
-
-        }else{
-            $account->update([
-                'is_active' => true
-            ]); 
-            return redirect()->route('accounts.show', $account)->with('success', 'Activated Successfully!');
-        }
+        $msg = $this->accountRepository->deactivate($account);
+        return redirect()->route('accounts.show', $account)->with('success', $msg);
     }
 
     /**

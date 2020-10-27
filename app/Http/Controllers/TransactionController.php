@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repository\Eloquent\TransactionRepository;
 use DateTime;
 
 class TransactionController extends Controller
 {
+    private $transactionRepository;
+  
+    public function __construct(TransactionRepository $transactionRepository)
+    {
+        $this->transactionRepository = $transactionRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,18 +26,8 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         $transactions = $user->transactions;
-        if ($request->date && !is_null($request->date)){
-            if($request->date == 'hour'){
-                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 hour'));
-            }elseif($request->date == 'day'){
-                    $transactions = $transactions->where('created_at', '>=', new DateTime('-1 day'));
-            }elseif($request->date == 'week'){
-                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 week'));
-            }elseif($request->date == 'month'){
-                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 month'));
-            }elseif($request->date == 'year'){
-                $transactions = $transactions->where('created_at', '>=', new DateTime('-1 year'));
-            }
+        if ($request->date && !is_null($request->date) && in_array(strtoupper($request->date), ['HOUR', 'WEEK', 'MONTH', 'YEAR'])){
+            $transactions = $transactions->where('created_at', '>=', new DateTime('-1 '."$request->date"));
         }
         return response()->view('transactions.index', ['transactions' => $transactions->SortByDesc('id')]);
     }
@@ -63,13 +61,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        if(!is_null(Auth::user()) && $transaction->account->user->id == Auth::user()->id){
-            $transactions = Transaction::where('transaction_num', $transaction->transaction_num)->get();
-
-            return response()->view('transactions.show', ['transactions' => $transactions, 'transaction_sample' => $transaction]);
-        }else{
-            return redirect()->route('transactions.index')->with('alert', 'Unauthorized!');
-        }
+        return $this->transactionRepository->auth_find($transaction ,Auth::user());
     }
 
         /**
@@ -80,11 +72,7 @@ class TransactionController extends Controller
      */
     public function convert(Request $request)
     {
-        if(is_null($request->from_currency) || is_null($request->to_currency) || is_null($request->ammount)){
-            return response()->view('transactions.convert', ['ammount' => 0]);
-        }else{
-            return response()->view('transactions.convert', ['result' => Transaction::convert_currency($request->ammount, $request->from_currency, $request->to_currency), 'ammount' => $request->ammount, 'from' => $request->from_currency, 'to' => $request->to_currency]);
-        }
+        return $this->transactionRepository->find_currency($request->from_currency, $request->to_currency, $request->ammount);
     }
 
     /**

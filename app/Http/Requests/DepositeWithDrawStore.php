@@ -61,7 +61,7 @@ class DepositeWithDrawStore extends FormRequest
     }
 
     private function check_type($type){
-        if ( in_array(strtoupper($type), ['depostie', 'withdraw']) ){
+        if ( in_array(strtoupper($type), ['DEPOSITE', 'WITHDRAW']) ){
             return true;
         } else {
              return false;
