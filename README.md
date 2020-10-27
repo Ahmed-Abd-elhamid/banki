@@ -44,7 +44,7 @@ Please check the official laravel installation guide for server requirements bef
 
     c. Access the grapQL at http://localhost:8000/graphql
 
-## Docker Container
+## Docker Container Step By Step
 
 1. Config
     ```sh
@@ -73,6 +73,9 @@ Please check the official laravel installation guide for server requirements bef
 7. Generate a unique application key with the artisan Laravel command-line tool
     ```sh
     $ docker-compose exec app php artisan key:generate
+    ```
+    ```sh
+    $ docker-compose exec app php artisan migrate:fresh --seed
     ```
     a. You can now access the Web app at http://server_domain_or_IP:8000
 

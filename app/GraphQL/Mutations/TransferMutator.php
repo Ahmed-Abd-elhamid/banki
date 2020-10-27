@@ -1,8 +1,9 @@
 <?php
 
 namespace App\GraphQL\Mutations;
+use App\Models\Transaction;
 
-class TransactionMutator
+class TransferMutator
 {
     /**
      * @param  null  $_
@@ -11,11 +12,6 @@ class TransactionMutator
     public function __invoke($_, array $args)
     {
         // TODO implement the resolver
-        if ($args['type']) {
-
-        }
-
-        return null;
+        return Transaction::where('type', 'transfer')->get();
     }
-
 }

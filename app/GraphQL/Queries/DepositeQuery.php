@@ -9,7 +9,7 @@ use Rebing\GraphQL\Support\Query;
 class DepositeQuery extends Query
 {
     protected $attributes = [
-        'name' => 'depositeMoney',
+        'name' => 'deposite',
     ];
 
     public function type(): Type

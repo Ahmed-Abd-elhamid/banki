@@ -9,7 +9,7 @@ use Rebing\GraphQL\Support\Query;
 class WithdrawQuery extends Query
 {
     protected $attributes = [
-        'name' => 'withdrawMoney',
+        'name' => 'withdraw',
     ];
 
     public function type(): Type
