@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepositeWithDrawStore;
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -38,9 +39,9 @@ class DepositeWithdrawTransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepositeWithDrawStore $request)
     {
-        if ( $this->validate_request($request) ){
+        if ( $request->validate_request($request) ){
             $transaction_num = Transaction::generate_unique_num();
             $current_user = Auth::user();
             
@@ -81,10 +82,10 @@ class DepositeWithdrawTransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
+     * @param  \App\Models\Transaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function show(DepositeWithdrawTransaction $depositeWithdrawTransaction)
+    public function show(Transaction $depositeWithdrawTransaction)
     {
         //
     }
@@ -92,10 +93,10 @@ class DepositeWithdrawTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
+     * @param  \App\Models\Transaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(DepositeWithdrawTransaction $depositeWithdrawTransaction)
+    public function edit(Transaction $depositeWithdrawTransaction)
     {
         //
     }
@@ -104,10 +105,10 @@ class DepositeWithdrawTransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
+     * @param  \App\Models\Transaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DepositeWithdrawTransaction $depositeWithdrawTransaction)
+    public function update(Request $request, Transaction $depositeWithdrawTransaction)
     {
         //
     }
@@ -115,32 +116,11 @@ class DepositeWithdrawTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DepositeWithdrawTransaction  $depositeWithdrawTransaction
+     * @param  \App\Models\Transaction  $depositeWithdrawTransaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DepositeWithdrawTransaction $depositeWithdrawTransaction)
+    public function destroy(Transaction $depositeWithdrawTransaction)
     {
         //
-    }
-
-    private function validate_request($request){
-        if ( $request->items > 0){
-            for ($current_item = 1; $current_item < ($request->items + 1); $current_item++) {
-                if( ($request->input('my_account'.$current_item) == null) || ($request->input('type'.$current_item) == null) || ($request->input('balance'.$current_item) == null)){ return false;}
-    
-                if ( $this->check_account_numbers($request->input('my_account'.$current_item)) ){ return false;}
-            }
-            return true;
-        }else{
-            return true;
-        }
-    }
-
-    private function check_account_numbers($my_account){
-       if ( empty(Account::firstWhere('account_num', $my_account)) ){
-           return true;
-       } else {
-            return false;
-       }
     }
 }

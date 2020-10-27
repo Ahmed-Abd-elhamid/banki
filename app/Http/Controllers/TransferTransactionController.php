@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\TransferStore;
 
-class TransactionController extends Controller
+class TransferTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,13 +41,11 @@ class TransactionController extends Controller
      */
     public function store(TransferStore $request)
     {        
-        if ( $this->validate_request($request) ){
+        if ( $request->validate_request($request) ){
             $transaction_num = Transaction::generate_unique_num();
-            $current_user = Auth::user();
             
-            DB::transaction(function () use ($request, $transaction_num, $current_user) {
+            DB::transaction(function () use ($request, $transaction_num) {
                 for ($current_item = 1; $current_item < ($request->items + 1); $current_item++) {
-                    $current_date = now();
 
                     $account_to = Account::firstWhere('account_num', $request->input('to_account'.$current_item));
                     $account_from = Account::firstWhere('account_num', $request->input('from_account'.$current_item));
@@ -59,7 +57,7 @@ class TransactionController extends Controller
                         return DB::rollBack();
                     }
 
-                    $transaction = DB::insert('insert into transactions (transaction_num, type, balance, account_id, to_account_id ,created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)',  [ $transaction_num, 'transfer', $request->input('balance'.$current_item), $account_from->id, $account_to->id, $current_date, $current_date]);
+                    DB::insert('insert into transactions (transaction_num, type, balance, account_id, to_account_id ,created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)',  [ $transaction_num, 'transfer', $request->input('balance'.$current_item), $account_from->id, $account_to->id, now(), now()]);
                     
                     DB::update('update accounts set balance = ? where id = ?', [$balance_out ,$account_from->id]);
                     DB::update('update accounts set balance = ? where id = ?', [$balance_in ,$account_to->id]);
@@ -120,26 +118,5 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
-    }
-
-    private function validate_request($request){
-        if ( $request->items > 0){
-            for ($current_item = 1; $current_item < ($request->items + 1); $current_item++) {
-                if( ($request->input('from_account'.$current_item) == null) || ($request->input('to_account'.$current_item) == null) || ($request->input('balance'.$current_item) == null)){ return false;}
-    
-                if ( $this->check_account_numbers($request->input('from_account'.$current_item), $request->input('to_account'.$current_item)) ){ return false;}
-            }
-            return true;
-        }else{
-            return true;
-        }
-    }
-
-    private function check_account_numbers($from_account, $to_account){
-       if ( empty(Account::firstWhere('account_num', $from_account)) || empty(Account::firstWhere('account_num', $to_account)) ){
-           return true;
-       } else {
-            return false;
-       }
     }
 }
