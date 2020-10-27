@@ -1,0 +1,26 @@
+type Account {
+    id: ID!
+    account_num: String!
+    balance: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Query {
+    accounts: [Account!]!
+    account(id: ID @eq): Account @find
+}
+
+type Tansaction {
+    id: ID!
+    transaction_num: String!
+    balance: String!
+    type: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Query {
+    transactions: [Tansaction!]!
+    transaction(id: ID @eq): Tansaction @find
+}

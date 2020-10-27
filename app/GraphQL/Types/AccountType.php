@@ -28,9 +28,21 @@ class AccountType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'The balance of the account',
             ],
-            'transactions' => [
+            'type' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The transactions of the account',
+                'description' => 'The type of the account',
+            ],
+            'currency' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The currency of the account',
+            ],
+            'userName' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The userName of the account',
+            ],
+            'bankName' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => 'The bankName of the account',
             ],
 			'created_at' => [
                 'type' => Type::nonNull(Type::string()),

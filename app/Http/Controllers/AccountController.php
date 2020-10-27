@@ -48,15 +48,13 @@ class AccountController extends Controller
      */
     public function store(StoreAccount $request)
     {
-        Account::create([
+        $this->accountRepository->create([
             'type' => $request->type,
             'balance' => $request->balance,
             'currency' => $request->currency,
             'bank_id' => $request->bank,
             'user_id' => Auth::user()->id
         ]);
-        // dd($request->request);
-        // $this->accountRepository->create($request);
         return redirect()->route('accounts.index')->with('success', 'Created Successfully!');
     }
 

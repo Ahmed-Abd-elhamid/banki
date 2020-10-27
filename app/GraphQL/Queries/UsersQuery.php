@@ -1,13 +1,13 @@
 <?php
 namespace App\GraphQL\Queries;
 
-use App\Models\Account;
+use App\Models\User;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
-use App\Http\Resources\AccountGraphQL;
+use App\Http\Resources\UserGraphQL;
 
-class AccountsQuery extends Query
+class UsersQuery extends Query
 {
     protected $attributes = [
         'name' => 'accounts',
@@ -15,11 +15,11 @@ class AccountsQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Account'));
+        return Type::listOf(GraphQL::type('User'));
     }
 
     public function resolve($root, $args)
     {
-        return AccountGraphQL::collection(Account::all());
+        return UserGraphQL::collection(User::all());
     }
 }

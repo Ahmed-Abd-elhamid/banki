@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -103,7 +100,7 @@ class UserController extends Controller
               'access_token' => $tokenResult,
               'token_type' => 'Bearer',
             ], 200);
-          } catch (Exception $error) {
+          } catch (\Exception $error) {
             return response()->json([
               'status_code' => 401,
               'message' => 'Error in Login',

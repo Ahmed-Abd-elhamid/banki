@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.7",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "nuwave/lighthouse": "^4.17",
         "rebing/graphql-laravel": "^5.1"
     },
     "require-dev": {

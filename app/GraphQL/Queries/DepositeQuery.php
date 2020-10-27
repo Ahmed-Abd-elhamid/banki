@@ -1,25 +1,24 @@
 <?php
 namespace App\GraphQL\Queries;
 
-use App\Models\Account;
+use App\Models\Transaction;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
-use App\Http\Resources\AccountGraphQL;
 
-class AccountsQuery extends Query
+class DepositeQuery extends Query
 {
     protected $attributes = [
-        'name' => 'accounts',
+        'name' => 'depositeMoney',
     ];
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Account'));
+        return Type::listOf(GraphQL::type('Transaction'));
     }
 
     public function resolve($root, $args)
     {
-        return AccountGraphQL::collection(Account::all());
+        return Transaction::where('type', 'deposite')->get();
     }
 }

@@ -108,6 +108,9 @@ return [
                     'banks' => App\GraphQL\Queries\BanksQuery::class,
                     'transaction' => App\GraphQL\Queries\TransactionQuery::class,
                     'transactions' => App\GraphQL\Queries\TransactionsQuery::class,
+                    'depositeMoney' => App\GraphQL\Queries\DepositeQuery::class,
+                    'transferMoney' => App\GraphQL\Queries\TransferQuery::class,
+                    'withdrawMoney' => App\GraphQL\Queries\WithdrawQuery::class,
                 // 'example_query' => ExampleQuery::class,
             ],
             'mutation' => [

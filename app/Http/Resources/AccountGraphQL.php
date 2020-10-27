@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccountResource extends JsonResource
+class AccountGraphQL extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,20 +20,13 @@ class AccountResource extends JsonResource
             'balance' => $this->balance,
             'type' => $this->type,
             'currency' => $this->currency,
-            'user' => $this->user,
-            'user' => $this->user,
+            'userName' => $this->user->name,
+            'bankName' => $this->bank->name,
             'transactions' => $this->transactions,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
 
-        $full_msg = [
-            'status' => true,
-            'data' => $response,
-            'messages' => 'Account description',
-            'user' => auth()->user(),
-        ];
-
-        return $full_msg;
+        return $response;
     }
 }
