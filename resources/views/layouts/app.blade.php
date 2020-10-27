@@ -35,7 +35,7 @@
         @include('includes.header')
         @include('includes.sidebar')
         @include('includes.messages')
-        <main class="py-4 container p-4 content">
+        <main class="py-4 container p-3 content">
             @yield('content')
         </main>
         @include('includes.footer')

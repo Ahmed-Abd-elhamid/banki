@@ -39,10 +39,9 @@
 						@endif
 					</select>
 				</div>
-				<div class="form-group">
+				{{-- <div class="form-group">
 					<label for="exampleInputEmail1">Account Bank</label>
 					<select class="form-control" name="bank" id="bank" required>
-						{{-- <option selected disabled readonly>Account Bank</option> --}}
 						@foreach($banks as $bank)
 							@if($account->bank_id != $bank->id)
 								<option value="{{ $bank->id }}">{{ $bank->name }}</option>
@@ -51,7 +50,7 @@
 							@endif
 						@endforeach
 					</select>
-				</div>
+				</div> --}}
 				<div class="form-group">
 					<label for="exampleInputEmail1">Account Currency</label>
 					<select class="form-control" name="currency" id="currency" required>

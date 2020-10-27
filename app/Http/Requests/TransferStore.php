@@ -5,10 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use App\Rules\ValidAccountType;
-use App\Rules\ValidCurrency;
 
-class UpdateAccount extends FormRequest
+class TransferStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,8 +30,9 @@ class UpdateAccount extends FormRequest
     public function rules()
     {
         return [
-            'type' => ['required', new ValidAccountType],
-            'currency' => ['required', new ValidCurrency],
+            'balance' => 'required|numeric|min:100|max:100000000',
+            'account_id' => 'required|exists:App\Models\Account,id',
+            'to_account_id' => 'required|exists:App\Models\Account,id',
         ];
     }
 }

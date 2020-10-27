@@ -34,10 +34,15 @@
 					<label for="exampleInputEmail1">Account Bank</label>
 					<select class="form-control" name="bank" id="bank" required>
 						{{-- <option selected disabled readonly>Account Bank</option> --}}
+						{{-- <option value="200">test</option> --}}
 						@foreach($banks as $bank)
-						<option value="{{ $bank->id }}">{{ $bank->name }}</option>
+							<option value="{{ $bank->id }}">{{ $bank->name }}</option>
 						@endforeach
 					</select>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Balance</label>
+				<input type="number" class="form-control" name="balance" id="balance" minlength="1" maxlength="40" required>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">Account Currency</label>

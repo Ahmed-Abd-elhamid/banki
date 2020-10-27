@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Rules\ValidAccountType;
+use App\Rules\ValidCurrency;
 
 class StoreAccount extends FormRequest
 {
@@ -13,7 +17,11 @@ class StoreAccount extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if(!is_null(Auth::user())){
+            return true;
+        }else{
+            return false;       
+        }
     }
 
     /**
@@ -24,9 +32,13 @@ class StoreAccount extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required',
-            'currency' => 'required',
-            'bank' => 'required',
+            'type' => ['required', new ValidAccountType],
+            'balance' => 'required|numeric|min:1000|max:1000000000000000000',
+            'currency' => ['required', new ValidCurrency],
+            'bank_id' => 'required|exists:App\Models\Bank,id',
         ];
     }
 }
+
+
+// 

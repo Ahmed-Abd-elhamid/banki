@@ -7,8 +7,9 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\TransferStore;
 
-class TransferTransactionController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +39,7 @@ class TransferTransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TransferStore $request)
     {        
         if ( $this->validate_request($request) ){
             $transaction_num = Transaction::generate_unique_num();
@@ -79,10 +80,10 @@ class TransferTransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TransferTransaction  $transferTransaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(TransferTransaction $transferTransaction)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -90,10 +91,10 @@ class TransferTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TransferTransaction  $transferTransaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(TransferTransaction $transferTransaction)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -102,10 +103,10 @@ class TransferTransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TransferTransaction  $transferTransaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TransferTransaction $transferTransaction)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -113,10 +114,10 @@ class TransferTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TransferTransaction  $transferTransaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TransferTransaction $transferTransaction)
+    public function destroy(Transaction $transaction)
     {
         //
     }

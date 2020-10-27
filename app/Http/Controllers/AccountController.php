@@ -38,10 +38,11 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAccount $request)
     {
         Account::create([
             'type' => $request->type,
+            'balance' => $request->balance,
             'currency' => $request->currency,
             'bank_id' => $request->bank,
             'user_id' => Auth::user()->id
@@ -113,7 +114,7 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Account $account)
+    public function update(UpdateAccount $request, Account $account)
     {
         $account->fill($request->all())->save();
         return redirect()->route('accounts.show', $account)->with('success', 'Updated Successfully!');

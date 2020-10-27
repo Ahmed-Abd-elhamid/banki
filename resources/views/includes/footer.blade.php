@@ -22,7 +22,7 @@
 		</div>
 		<div class="row justify-content-center bg-darkyblue text-white pt-2 p-1">
 			<div class="col-10">
-				<h5>CopyRight &copy;<a href="https://github.com/Ahmed-Abd-elhamid/banki">Bankey</a> 2020</h5>
+				<h5>CopyRight &copy;<a href="https://github.com/Ahmed-Abd-elhamid/banki">Bankey</a> <script>document.write(new Date().getFullYear());</script></h5>
 			</div>
 		</div>
 	</div>
