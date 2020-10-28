@@ -53,7 +53,7 @@
 	</div>
 	<div class="col-md-8 col-sm-12 border rounded p-3">
 		<div class="d-none" id="actions-buttons">
-			<form id="transaction" method="POST" action="{{route('transfer_transactions.store')}}"
+			<form id="transaction" method="POST" action="{{route('transactions_transfer.store') }}"
 				enctype="multipart/form-data" class="form-horizontal" role="form">
 				@csrf
 				<div class="justify-content-center">

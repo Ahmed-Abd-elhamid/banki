@@ -6,11 +6,21 @@
 - [node.js & npm](https://nodejs.org/)
 - [Composer](https://getcomposer.org/download/)
 - [laravel](http://laravel.com/)
+- [MySQL](https://www.mysql.com/)
+- [GraphQL](https://graphql.org/)
+- [Docker](https://www.docker.com/)
+- [Heroku](hhttps://www.heroku.com/)
 
+## Open Live on
 
-## Installation
+- [Bankie](http://bankie.herokuapp.com/)
 
-Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
+# QR-Code To Deployment web
+<img src="https://github.com/Ahmed-Abd-elhamid/banki/blob/master/banki.png" alt="alt text" width="180">
+
+## Installation Step by Step
+
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/8.x/installation#installation)
 
 
 1. Clone the repository
@@ -43,6 +53,16 @@ Please check the official laravel installation guide for server requirements bef
     b. Access the Api end-points at http://localhost:8000/api
 
     c. Access the grapQL at http://localhost:8000/graphql
+
+## Installation Bash Script
+
+1) download laravel.sh from https://gofile.io/d/ebsq0q
+
+2) change mod of file to execution
+```sh
+    $ chmod +x laravel.sh
+```
+
 
 ## Docker Container Step By Step
 
@@ -83,6 +103,19 @@ Please check the official laravel installation guide for server requirements bef
     ```sh
     $ docker-compose logs nginx
     ```
+
+## Docker Container Bash Script
+1) download laravel.sh from https://gofile.io/d/cZalgV
+
+2) change mod of file to execution
+```sh
+    $ chmod +x docker.sh
+```
+3) run docker.sh
+```sh
+    $ ./docker.sh
+```
+
 ## Author
 
 [Ahmed Abdelhamid](https://www.linkedin.com/in/ahmed-abdelhamd/)

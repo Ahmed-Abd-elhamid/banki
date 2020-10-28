@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidTansactionType implements Rule
+class ValidBalance implements Rule
 {
     /**
      * Create a new rule instance.
@@ -23,9 +23,14 @@ class ValidTansactionType implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $values)
     {
-        //
+        foreach($values as $value){
+            if(is_null($value)) return false;
+            if($value < 50) return false;
+            if($value > 10000000) return false;
+        }
+        return true;
     }
 
     /**
@@ -35,6 +40,6 @@ class ValidTansactionType implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Balance must be between 50:10000000';
     }
 }

@@ -33,7 +33,7 @@ if (addHtml != null) {
             box.id = `row-${items}`;
             box.style.opacity = "0.8";
 
-            let html = `<td colspan="2"><input type="text" class="form-control text-center" value="${from_account}" name="from_account${items}" id="from_account${items}" readonly ></td><td colspan="2"><input type="text" class="form-control text-center" value="${to_account}" name="to_account${items}" id="to_account${items}" readonly ></td><td><input type="text" class="form-control text-center" value="${type}" name="type${items}" id="type${items}" readonly ></td><td><input type="number" class="form-control text-center" value="${balance}" name="balance${items}" id="balance${items}" readonly>`
+            let html = `<td colspan="2"><input type="text" class="form-control text-center" value="${from_account}" name="from_account[]" id="from_account${items}" readonly ></td><td colspan="2"><input type="text" class="form-control text-center" value="${to_account}" name="to_account[]" id="to_account${items}" readonly ></td><td><input type="text" class="form-control text-center" value="${type}" name="type[]" id="type${items}" readonly ></td><td><input type="number" class="form-control text-center" value="${balance}" name="balance[]" id="balance${items}" readonly>`
 
             box.innerHTML = html;
             addHtml.append(box);

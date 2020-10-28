@@ -76,7 +76,7 @@ class Transaction extends Model
         
         $val = floatval($obj["conversion_rates"]["$to_currency"]);
         
-        $total = $amount / $val;
+        $total = $amount * $val;
         return $total;
     }
 }

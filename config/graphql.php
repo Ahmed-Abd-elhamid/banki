@@ -114,8 +114,8 @@ return [
                 // 'example_query' => ExampleQuery::class,
             ],
             'mutation' => [
-                // 'withdrawMoney'  => App\GraphQL\Mutations\WithdrawMutator::class,
-                // 'depositeMoney'  => App\GraphQL\Mutations\DepositeMutator::class,
+                'withdrawMoney'  => App\GraphQL\Mutations\WithdrawMutator::class,
+                'depositeMoney'  => App\GraphQL\Mutations\DepositeMutator::class,
                 // 'transferMoney'  => App\GraphQL\Mutations\TransferMutator::class,
             ],
             'middleware' => [],

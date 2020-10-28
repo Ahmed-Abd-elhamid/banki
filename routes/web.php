@@ -23,20 +23,18 @@ Route::resource('banks', 'App\Http\Controllers\BankController')->only([
 Route::resource('accounts', 'App\Http\Controllers\AccountController')->middleware('auth');
 Route::put('/accounts/deactivate/{account}', 'App\Http\Controllers\AccountController@deactivate')->name('accounts.deactivate')->middleware('password.confirm');
 
+Route::delete('transactions/{transaction}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
+Route::get('convert', 'App\Http\Controllers\TransactionController@convert')->name('transactions.convert');
+
+Route::get('transactions/create/{type}', 'App\Http\Controllers\TransactionController@create')->middleware('password.confirm')->name('transactions_type.create');
+
+Route::post('transactions/transfer', 'App\Http\Controllers\TransactionController@store_transfer')->middleware('password.confirm')->name('transactions_transfer.store');
+
+Route::post('transactions/depsoite_withdraw', 'App\Http\Controllers\TransactionController@store_deposite_withdraw')->middleware('password.confirm')->name('transactions_deposite_withdraw.store');
 
 Route::resource('transactions', 'App\Http\Controllers\TransactionController')->middleware('auth')->only([
     'index', 'show'
 ]);
-Route::delete('transactions/{transaction}', 'App\Http\Controllers\TransactionController@destroy')->name('transactions.destroy')->middleware('password.confirm');
-Route::get('convert', 'App\Http\Controllers\TransactionController@convert')->name('transactions.convert');
-
-Route::resource('transfer_transactions', 'App\Http\Controllers\TransferTransactionController')->middleware('password.confirm')->only([
-    'create', 'store'
-]);
-Route::resource('deposite_withdraw_transactions', 'App\Http\Controllers\DepositeWithdrawTransactionController')->middleware('password.confirm')->only([
-    'create', 'store'
-]);
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {

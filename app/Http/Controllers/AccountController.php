@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Bank;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreAccount;
-use App\Http\Requests\UpdateAccount;
+use App\Http\Requests\AccountRequest;
 use App\Repository\Eloquent\AccountRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,13 +45,13 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAccount $request)
+    public function store(AccountRequest $request)
     {
         $this->accountRepository->create([
             'type' => $request->type,
             'balance' => $request->balance,
             'currency' => $request->currency,
-            'bank_id' => $request->bank,
+            'bank_id' => $request->bank_id,
             'user_id' => Auth::user()->id
         ]);
         return redirect()->route('accounts.index')->with('success', 'Created Successfully!');
@@ -107,7 +106,7 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAccount $request, Account $account)
+    public function update(AccountRequest $request, Account $account)
     {
         $account->fill($request->all())->save();
         return redirect()->route('accounts.show', $account)->with('success', 'Updated Successfully!');

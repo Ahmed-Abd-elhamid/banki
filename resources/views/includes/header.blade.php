@@ -54,12 +54,6 @@
 						<a class="dropdown-item" href="{{ route('accounts.create') }}">
 							New Account
 						</a>
-						<a class="dropdown-item" href="{{ route('transfer_transactions.create') }}">
-							New Transfer
-						</a>
-						<a class="dropdown-item" href="{{ route('deposite_withdraw_transactions.create') }}">
-							New Deposite_Withdraw
-						</a>
 						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 											 document.getElementById('logout-form').submit();">
 							{{ __('Logout') }}

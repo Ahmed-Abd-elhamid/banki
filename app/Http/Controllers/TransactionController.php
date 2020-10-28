@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\Eloquent\TransactionRepository;
 use DateTime;
+use App\Http\Requests\TransactionRequest;
 
 class TransactionController extends Controller
 {
@@ -24,12 +26,11 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
-        $transactions = $user->transactions;
+        $transactions = Auth::user()->transactions->SortByDesc('id');
         if ($request->date && !is_null($request->date) && in_array(strtoupper($request->date), ['HOUR', 'WEEK', 'MONTH', 'YEAR'])){
-            $transactions = $transactions->where('created_at', '>=', new DateTime('-1 '."$request->date"));
+            $this->transactionRepository->filter_by_data($transactions, $request->date);
         }
-        return response()->view('transactions.index', ['transactions' => $transactions->SortByDesc('id')]);
+        return response()->view('transactions.index', ['transactions' => $transactions]);
     }
 
     /**
@@ -37,9 +38,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        return response()->view('transactions.create');
+        $user_accounts = Account::where('user_id', Auth::user()->id)->where('is_active', 1)->orderBy('id', 'DESC')->get(['id', 'account_num']);
+
+        return $this->transactionRepository->create_by_type($type, $user_accounts);
     }
 
     /**
@@ -48,9 +51,26 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_transfer(TransactionRequest $request)
     {
-        // dd($request);
+        $transaction_num = Transaction::generate_unique_num();
+        $this->transactionRepository->create_transfer($request, $transaction_num);
+
+        return redirect()->route('transactions.index')->with('success', 'Created Successfully!');   
+    }
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_deposite_withdraw(TransactionRequest $request)
+    {
+        $transaction_num = Transaction::generate_unique_num();
+        $this->transactionRepository->create_deposite_withdraw($request, $transaction_num);
+
+        return redirect()->route('transactions.index')->with('success', 'Created Successfully!');
     }
 
     /**

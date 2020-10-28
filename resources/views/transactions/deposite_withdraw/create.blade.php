@@ -30,7 +30,7 @@
 				<label for="exampleInputEmail1">Transaction Type</label>
 				<select class="form-control" name="type" id="type" required>
 					{{-- <option selected disabled readonly>Account Currency</option> --}}
-					<option value="deposite">Deposit</option>
+					<option value="deposite">Deposite</option>
 					<option value="withdraw">Withdraw</option>
 				</select>
 			</div>
@@ -47,7 +47,7 @@
 	</div>
 	<div class="col-md-8 col-sm-12 border rounded p-3">
 		<div class="d-none" id="actions-buttons">
-			<form id="transaction" method="POST" action="{{route('deposite_withdraw_transactions.store')}}" enctype="multipart/form-data"
+			<form id="transaction" method="POST" action="{{route('transactions_deposite_withdraw.store')}}" enctype="multipart/form-data"
 				class="form-horizontal" role="form">
 				@csrf
 				<div class="justify-content-center">

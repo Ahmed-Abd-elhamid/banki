@@ -1,17 +1,47 @@
 <?php
 
-namespace App\GraphQL\Mutations;
-use App\Models\Transaction;
+namespace App\graphql\Mutations;
 
-class TransferMutator
+use App\Transaction;
+use Rebing\GraphQL\Support\Mutation;
+use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+
+class CreateTransactionMutation extends Mutation
 {
-    /**
-     * @param  null  $_
-     * @param  array<string, mixed>  $args
-     */
-    public function __invoke($_, array $args)
+    protected $attributes = [
+        'name' => 'createTransfer'
+    ];
+
+    public function type(): Type
     {
-        // TODO implement the resolver
-        return Transaction::where('type', 'transfer')->get();
+        return GraphQL::type('Transaction');
+    }
+
+    public function args(): array
+    {
+        return [
+            'balance' => [
+                'name' => 'balance',
+                'type' =>  Type::nonNull(Type::string()),
+            ],
+            'my_account' => [
+                'name' => 'my_account',
+                'type' =>  Type::nonNull(Type::string()),
+            ],
+            'type' => [
+                'name' => 'type',
+                'type' =>  Type::nonNull(Type::string()),
+            ]
+        ];
+    }
+
+    public function resolve($root, $args)
+    {
+        $transfer = new Transaction();
+        $transfer->fill($args);
+        $transfer->save();
+
+        return $transfer;
     }
 }

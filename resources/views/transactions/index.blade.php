@@ -14,13 +14,13 @@
 	</div>
 	<div class="col-lg-3 col-sm-5 text-center p-3 mt-3">
 		<div class="header">
-			<a class="btn btn-success rounded shadow" href="{{ route('transfer_transactions.create') }}">Transfer</a>
+			<a class="btn btn-success rounded shadow" href="{{ route('transactions_type.create', 'transfer') }}">Transfer</a>
 		</div>
 	</div>
 	<div class="col-lg-3 col-sm-5 text-center p-3 mt-3">
 		<div class="header">
 			<a class="btn btn-success rounded shadow"
-				href="{{ route('deposite_withdraw_transactions.create') }}">deposite_withdraw</a>
+				href="{{ route('transactions_type.create', 'deposite_withdraw') }}">deposite_withdraw</a>
 		</div>
 	</div>
 </div>
