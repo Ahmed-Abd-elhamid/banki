@@ -43,4 +43,5 @@ echo -e "${HC}::::::::::::::::::::::::::Seed Database::::::::::::::::::::::::::$
 php artisan db:seed
 
 echo -e "${HC}::::::::::::::::::::::::::All Completed::::::::::::::::::::::::::${NC}"
+php artisan key:generate
 php artisan serve
