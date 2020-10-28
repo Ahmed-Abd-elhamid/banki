@@ -1,14 +1,21 @@
-type Account {
+type Bank {
     id: ID!
-    account_num: String!
-    balance: String!
+    name: String!
+    email: String!
+    website: String!
+    about: String!
     created_at: DateTime!
     updated_at: DateTime!
 }
 
-type Query {
-    accounts: [Account!]!
-    account(id: ID @eq): Account @find
+type Account {
+    id: ID!
+    account_num: String!
+    balance: Int!
+    type: String!
+    bank: [Bank]!!
+    created_at: DateTime!
+    updated_at: DateTime!
 }
 
 type Tansaction {
@@ -16,11 +23,23 @@ type Tansaction {
     transaction_num: String!
     balance: String!
     type: String!
+    account: [Account]!!
     created_at: DateTime!
     updated_at: DateTime!
 }
 
+
 type Query {
+    banks: [Bank!]!
+    bank(id: ID @eq): Bank @find
+    accounts: [Account!]!
+    account(id: ID @eq): Account @find
     transactions: [Tansaction!]!
     transaction(id: ID @eq): Tansaction @find
+}
+
+type Mutation {
+    withdrawMoney(balance: Int!,type: String!): Transaction
+    depositeMoney(balance: Int!,type: String!): Transaction
+    transferMoney(balance: Int!,type: String!): Transaction
 }
