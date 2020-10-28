@@ -27,8 +27,8 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $transactions = Auth::user()->transactions->SortByDesc('id');
-        if ($request->date && !is_null($request->date) && in_array(strtoupper($request->date), ['HOUR', 'WEEK', 'MONTH', 'YEAR'])){
-            $this->transactionRepository->filter_by_data($transactions, $request->date);
+        if ($request->date && !is_null($request->date) && in_array(strtoupper($request->date), ['HOUR', 'DAY', 'WEEK', 'MONTH', 'YEAR'])){
+            $transactions = $this->transactionRepository->filter_by_data($transactions, $request->date);
         }
         return response()->view('transactions.index', ['transactions' => $transactions]);
     }
@@ -78,7 +78,9 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return $this->transactionRepository->auth_find($transaction ,Auth::user());
+        $transactions = $this->transactionRepository->auth_find($transaction ,Auth::user());
+        return response()->view('transactions.show', ['transaction_sample' => $transaction, 'transactions' => $transactions]);
+
     }
 
         /**

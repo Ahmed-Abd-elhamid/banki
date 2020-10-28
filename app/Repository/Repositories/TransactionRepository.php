@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\Interfaces\TransactionRepositoryInterface;
 use Illuminate\Support\Collection;
+use DateTime;
 
 class TransactionRepository extends BaseRepository implements TransactionRepositoryInterface
 {
@@ -51,7 +52,7 @@ class TransactionRepository extends BaseRepository implements TransactionReposit
    }
 
    public function filter_by_data($transactions, $data){
-      return $transactions->where('created_at', '>=', new DateTime('-1 '."$data"));
+      return $transactions->where('created_at', '>=', new DateTime("-1 ${data}"));
    }
 
    public function create_by_type($type, $user_accounts){

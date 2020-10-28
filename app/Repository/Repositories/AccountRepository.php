@@ -21,7 +21,9 @@ class AccountRepository extends BaseRepository implements AccountRepositoryInter
 
    public function auth_find($account, $user)
    {
-		if(is_null($user) || $account->user_id != $user->id){
+		if(!is_null($user) && $account->user_id == $user->id){
+         return $this->model->find($account->id);
+      }else{
          abort(403);
       }
    }

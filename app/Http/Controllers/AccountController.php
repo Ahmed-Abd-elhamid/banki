@@ -63,7 +63,8 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return $this->accountRepository->auth_find($account ,Auth::user());
+        $account =$this->accountRepository->auth_find($account ,Auth::user());
+        return response()->view('accounts.show', ['account' => $account]);
     }
 
     /**
