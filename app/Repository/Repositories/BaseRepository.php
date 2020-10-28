@@ -1,11 +1,12 @@
 <?php   
 
-namespace App\Repository\Eloquent;   
+namespace App\Repository\Repositories;
 
-use App\Repository\EloquentRepositoryInterface; 
+use App\Repository\Interfaces\BaseRepositoryInterface; 
 use Illuminate\Database\Eloquent\Model;   
+use Illuminate\Support\Collection;
 
-class BaseRepository implements EloquentRepositoryInterface 
+class BaseRepository implements BaseRepositoryInterface 
 {     
     /**      
      * @var Model      
@@ -22,6 +23,14 @@ class BaseRepository implements EloquentRepositoryInterface
         $this->model = $model;
     }
  
+    /**
+    * @return Collection
+    */
+    public function all(): Collection
+    {
+        return $this->model->all();    
+    }
+
     /**
     * @param array $attributes
     *

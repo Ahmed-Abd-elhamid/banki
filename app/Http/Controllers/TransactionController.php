@@ -6,7 +6,7 @@ use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Repository\Eloquent\TransactionRepository;
+use App\Repository\Interfaces\TransactionRepositoryInterface;
 use DateTime;
 use App\Http\Requests\TransactionRequest;
 
@@ -14,7 +14,7 @@ class TransactionController extends Controller
 {
     private $transactionRepository;
   
-    public function __construct(TransactionRepository $transactionRepository)
+    public function __construct(TransactionRepositoryInterface $transactionRepository)
     {
         $this->transactionRepository = $transactionRepository;
     }
@@ -41,7 +41,6 @@ class TransactionController extends Controller
     public function create($type)
     {
         $user_accounts = Account::where('user_id', Auth::user()->id)->where('is_active', 1)->orderBy('id', 'DESC')->get(['id', 'account_num']);
-
         return $this->transactionRepository->create_by_type($type, $user_accounts);
     }
 
@@ -55,7 +54,6 @@ class TransactionController extends Controller
     {
         $transaction_num = Transaction::generate_unique_num();
         $this->transactionRepository->create_transfer($request, $transaction_num);
-
         return redirect()->route('transactions.index')->with('success', 'Created Successfully!');   
     }
 
@@ -69,7 +67,6 @@ class TransactionController extends Controller
     {
         $transaction_num = Transaction::generate_unique_num();
         $this->transactionRepository->create_deposite_withdraw($request, $transaction_num);
-
         return redirect()->route('transactions.index')->with('success', 'Created Successfully!');
     }
 

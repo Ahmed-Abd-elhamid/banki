@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repository\Repositories;
 
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Repository\TransactionRepositoryInterface;
+use App\Repository\Interfaces\TransactionRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class TransactionRepository extends BaseRepository implements TransactionRepositoryInterface
@@ -22,14 +22,6 @@ class TransactionRepository extends BaseRepository implements TransactionReposit
        parent::__construct($model);
    }
 
-   /**
-    * @return Collection
-    */
-   public function all(): Collection
-   {
-       return $this->model->all();    
-   }
-
    public function all_by_user($user): Collection
    {
 	return $this->model->where('user_id', $user->id)->orderBy('id', 'DESC')->get();
@@ -42,13 +34,11 @@ class TransactionRepository extends BaseRepository implements TransactionReposit
 
    public function auth_find($transaction, $user)
    {
-		if(!is_null($user) && $transaction->account->user->id == $user->id){
-			$transactions = Transaction::where('transaction_num', $transaction->transaction_num)->get();
-
-			return response()->view('transactions.show', ['transactions' => $transactions, 'transaction_sample' => $transaction]);
-		}else{
-			return redirect()->route('transactions.index')->with('alert', 'Unauthorized!');
-		}
+    if(!is_null($user) && $transaction->account->user->id == $user->id){
+        return Transaction::where('transaction_num', $transaction->transaction_num)->get();
+    }else{
+        abort(403);
+    }
    }
 
    public function find_currency($from_currency, $to_currency, $ammount)

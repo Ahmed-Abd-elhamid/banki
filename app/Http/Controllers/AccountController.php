@@ -6,14 +6,12 @@ use App\Models\Account;
 use App\Models\Bank;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
-use App\Repository\Eloquent\AccountRepository;
+use App\Repository\Interfaces\AccountRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    private $accountRepository;
-  
-    public function __construct(AccountRepository $accountRepository)
+    public function __construct(AccountRepositoryInterface $accountRepository)
     {
         $this->accountRepository = $accountRepository;
     }

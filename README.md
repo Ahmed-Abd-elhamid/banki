@@ -10,9 +10,9 @@
 - [GraphQL](https://graphql.org/)
 - [Docker](https://www.docker.com/)
 - [Heroku](https://www.heroku.com/)
+- [Shell Script]()
 
 ## Open Live on
-
 - [Bankie](http://bankie.herokuapp.com/)
 
 # QR-Code To Deployment web
@@ -55,7 +55,13 @@ Please check the official laravel installation guide for server requirements bef
     c. Access the grapQL at http://localhost:8000/graphql
 
 ## Installation Bash Script
-1) download laravel.sh from https://gofile.io/d/ebsq0q
+1) download laravel.sh from https://gofile.io/d/0hFxGR
+
+2) Run laravel script
+
+    ```sh
+    $ bash laravel.sh
+    ```
 
 
 
@@ -100,7 +106,15 @@ Please check the official laravel installation guide for server requirements bef
     ```
 
 ## Docker Container Bash Script
-1) download laravel.sh from https://gofile.io/d/cZalgV
+1) download docker.sh from https://gofile.io/d/WFTJHY
+
+2) Run docker script
+
+    ```sh
+    $ bash docker.sh
+    ```
+
+
 
 ## Author
 

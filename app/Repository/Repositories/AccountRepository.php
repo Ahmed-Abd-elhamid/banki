@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repository\Repositories;
 
 use App\Models\Account;
-use App\Repository\AccountRepositoryInterface;
+use App\Repository\Interfaces\AccountRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class AccountRepository extends BaseRepository implements AccountRepositoryInterface
@@ -19,21 +19,11 @@ class AccountRepository extends BaseRepository implements AccountRepositoryInter
        parent::__construct($model);
    }
 
-   /**
-    * @return Collection
-    */
-   public function all(): Collection
-   {
-       return $this->model->all();    
-   }
-
    public function auth_find($account, $user)
    {
-		if(!is_null($user) && $account->user_id == $user->id){
-			return response()->view('accounts.show', ['account' => $account]);
-		}else{
-			return redirect()->route('accounts.index')->with('alert', 'Unauthorized!');
-		}
+		if(is_null($user) || $account->user_id != $user->id){
+         abort(403);
+      }
    }
 
    public function all_by_user($user): Collection

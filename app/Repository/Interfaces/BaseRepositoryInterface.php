@@ -1,15 +1,16 @@
 <?php 
-namespace App\Repository;
-
+namespace App\Repository\Interfaces;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
-* Interface EloquentRepositoryInterface
+* Interface BaseRepositoryInterface
 * @package App\Repositories
 */
-interface EloquentRepositoryInterface
+interface BaseRepositoryInterface
 {
+   public function all(): Collection;
    /**
     * @param array $attributes
     * @return Model
