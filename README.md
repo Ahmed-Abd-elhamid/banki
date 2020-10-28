@@ -9,7 +9,7 @@
 - [MySQL](https://www.mysql.com/)
 - [GraphQL](https://graphql.org/)
 - [Docker](https://www.docker.com/)
-- [Heroku](hhttps://www.heroku.com/)
+- [Heroku](https://www.heroku.com/)
 
 ## Open Live on
 
@@ -55,13 +55,8 @@ Please check the official laravel installation guide for server requirements bef
     c. Access the grapQL at http://localhost:8000/graphql
 
 ## Installation Bash Script
-
 1) download laravel.sh from https://gofile.io/d/ebsq0q
 
-2) change mod of file to execution
-```sh
-    $ chmod +x laravel.sh
-```
 
 
 ## Docker Container Step By Step
@@ -106,15 +101,6 @@ Please check the official laravel installation guide for server requirements bef
 
 ## Docker Container Bash Script
 1) download laravel.sh from https://gofile.io/d/cZalgV
-
-2) change mod of file to execution
-```sh
-    $ chmod +x docker.sh
-```
-3) run docker.sh
-```sh
-    $ ./docker.sh
-```
 
 ## Author
 
